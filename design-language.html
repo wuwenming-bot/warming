@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Wu Wenming, product experience designer portfolio.">
   <title>Wu Wenming — Product Experience Designer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/montserrat-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/portfolio-v7/hero-card-image-1600.webp" as="image" type="image/webp">
   <link rel="preload" href="assets/portfolio-v7/paperclip-hd-384.webp" as="image" type="image/webp">
   <script>
@@ -15,6 +13,14 @@
     window.scrollTo(0, 0);
   </script>
   <style>
+    @font-face {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url("assets/fonts/montserrat-latin-400-600.woff2") format("woff2");
+    }
+
     :root {
       --ink: #171717;
       --secondary: #868a8f;
