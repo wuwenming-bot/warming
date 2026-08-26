@@ -3,5 +3,6 @@
 *
 !.gitignore
 !design-language.html
+!index.html
+!_headers
 !vercel.json
-
