@@ -8,9 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/portfolio-v7/hero-card-image.png" as="image">
-  <link rel="preload" href="assets/portfolio-frame7/hero-card-frame7.png" as="image">
-  <link rel="preload" href="assets/portfolio-v7/paperclip-hd.png" as="image">
+  <link rel="preload" href="assets/portfolio-v7/hero-card-image-1600.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/portfolio-v7/paperclip-hd-384.webp" as="image" type="image/webp">
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
@@ -3765,12 +3764,15 @@
   </style>
 </head>
 <body class="is-loading">
+  <script>
+    window.setTimeout(() => document.body.classList.remove('is-loading'), 3200);
+  </script>
   <a class="skip-link" href="#home">Skip to content</a>
 
   <header class="topbar is-light" aria-label="Current page and profile" data-profile-popover data-theme="light">
     <div class="topbar-panel">
       <button class="avatar-pill" type="button" aria-label="Open Wu Wenming profile" aria-expanded="false" aria-controls="profile-card" data-profile-trigger>
-        <span><img src="assets/portfolio-v6/topbar-avatar-expanded.png" alt=""></span>
+        <span><img src="assets/portfolio-v6/topbar-avatar-expanded-480.webp" alt="" decoding="async"></span>
       </button>
 
       <div class="topbar-summary" aria-hidden="true">
@@ -3815,7 +3817,7 @@
           </div>
 
           <article class="hero-profile-card" data-hero-profile-card>
-            <img class="hero-paperclip" src="assets/portfolio-v7/paperclip-hd.png" alt="" draggable="false">
+            <img class="hero-paperclip" src="assets/portfolio-v7/paperclip-hd-384.webp" alt="" decoding="async" draggable="false">
             <div class="hero-card-meta" aria-hidden="true">
               <span>2026</span>
               <span>portfolio</span>
@@ -3826,8 +3828,8 @@
               <h2>Designing experiences<br>for what’s next.Exploring<br>the intersection of AI,<br>interaction &amp; visual<br>systems.</h2>
             </div>
             <div class="hero-card-portrait">
-              <img class="hero-card-portrait-default" src="assets/portfolio-v7/hero-card-image.png" alt="Wu Wenming in profile" fetchpriority="high" draggable="false">
-              <img class="hero-card-portrait-frame7" src="assets/portfolio-frame7/hero-card-frame7.png" alt="" draggable="false">
+              <img class="hero-card-portrait-default" src="assets/portfolio-v7/hero-card-image-1600.webp" alt="Wu Wenming in profile" decoding="async" fetchpriority="high" draggable="false">
+              <img class="hero-card-portrait-frame7" src="assets/portfolio-frame7/hero-card-frame7-1400.webp" alt="" decoding="async" loading="lazy" draggable="false">
             </div>
           </article>
         </div>
@@ -3855,47 +3857,48 @@
     <section class="gallery" id="gallery" data-topbar-theme="light" aria-label="Selected visual work gallery">
       <figure class="gallery-wide gallery-wide--primary">
         <img
-          src="assets/portfolio-v6/preview-2026-wide-v3.png"
-          srcset="assets/portfolio-v6/preview-2026-wide-v3-2880.png 2880w, assets/portfolio-v6/preview-2026-wide-v3.png 4096w"
+          src="assets/portfolio-v6/preview-2026-wide-v3-1600.webp"
+          srcset="assets/portfolio-v6/preview-2026-wide-v3-1600.webp 1600w, assets/portfolio-v6/preview-2026-wide-v3-2880.png 2880w, assets/portfolio-v6/preview-2026-wide-v3.png 4096w"
           sizes="calc(100vw - 16px)"
           alt="Powerful AMV Editor product preview"
           decoding="async"
-          fetchpriority="high">
+          loading="lazy"
+          fetchpriority="low">
       </figure>
 
       <div class="gallery-grid">
         <div class="gallery-column">
-          <figure class="gallery-item gallery-left-1"><img src="assets/portfolio-v6/preview-2026-left-1.png" srcset="assets/portfolio-v6/preview-2026-left-1-1600.png 1600w, assets/portfolio-v6/preview-2026-left-1.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile color editing interface" decoding="async"></figure>
+          <figure class="gallery-item gallery-left-1"><img src="assets/portfolio-v6/preview-2026-left-1.png" srcset="assets/portfolio-v6/preview-2026-left-1-1600.png 1600w, assets/portfolio-v6/preview-2026-left-1.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile color editing interface" decoding="async" loading="lazy"></figure>
           <figure class="gallery-item gallery-left-2 gallery-layered">
-            <img src="assets/portfolio-v6/preview-2026-layer-base.png" alt="">
-            <img src="assets/portfolio-v6/preview-2026-left-2-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-2-overlay-1600.png 1600w, assets/portfolio-v6/preview-2026-left-2-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile video editing interface" decoding="async">
+            <img src="assets/portfolio-v6/preview-2026-layer-base.png" alt="" decoding="async" loading="lazy">
+            <img src="assets/portfolio-v6/preview-2026-left-2-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-2-overlay-1600.png 1600w, assets/portfolio-v6/preview-2026-left-2-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile video editing interface" decoding="async" loading="lazy">
           </figure>
-          <figure class="gallery-item gallery-left-3"><img src="assets/portfolio-v6/preview-2026-left-3.png" srcset="assets/portfolio-v6/preview-2026-left-3-1600.png 1600w, assets/portfolio-v6/preview-2026-left-3.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Tablet creative workspace" decoding="async"></figure>
-          <figure class="gallery-item gallery-left-4"><img src="assets/portfolio-v6/preview-2026-left-4.png" srcset="assets/portfolio-v6/preview-2026-left-4-1600.png 1600w, assets/portfolio-v6/preview-2026-left-4.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile AI creation interface" decoding="async"></figure>
+          <figure class="gallery-item gallery-left-3"><img src="assets/portfolio-v6/preview-2026-left-3.png" srcset="assets/portfolio-v6/preview-2026-left-3-1600.png 1600w, assets/portfolio-v6/preview-2026-left-3.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Tablet creative workspace" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-left-4"><img src="assets/portfolio-v6/preview-2026-left-4.png" srcset="assets/portfolio-v6/preview-2026-left-4-1600.png 1600w, assets/portfolio-v6/preview-2026-left-4.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile AI creation interface" decoding="async" loading="lazy"></figure>
           <figure class="gallery-item gallery-left-5 gallery-layered">
-            <img src="assets/portfolio-v6/preview-2026-layer-base.png" alt="">
-            <img src="assets/portfolio-v6/preview-2026-left-5-overlay.png?rev=2" srcset="assets/portfolio-v6/preview-2026-left-5-overlay-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-left-5-overlay.png?rev=2 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile music creation interface" decoding="async">
+            <img src="assets/portfolio-v6/preview-2026-layer-base.png" alt="" decoding="async" loading="lazy">
+            <img src="assets/portfolio-v6/preview-2026-left-5-overlay.png?rev=2" srcset="assets/portfolio-v6/preview-2026-left-5-overlay-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-left-5-overlay.png?rev=2 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile music creation interface" decoding="async" loading="lazy">
           </figure>
-          <figure class="gallery-item gallery-left-6"><img src="assets/portfolio-v6/preview-2026-left-6.png" srcset="assets/portfolio-v6/preview-2026-left-6-1600.png 1600w, assets/portfolio-v6/preview-2026-left-6.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Digital art composition tools" decoding="async"></figure>
+          <figure class="gallery-item gallery-left-6"><img src="assets/portfolio-v6/preview-2026-left-6.png" srcset="assets/portfolio-v6/preview-2026-left-6-1600.png 1600w, assets/portfolio-v6/preview-2026-left-6.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Digital art composition tools" decoding="async" loading="lazy"></figure>
           <figure class="gallery-item gallery-left-7 gallery-layered">
-            <img src="assets/portfolio-v6/preview-2026-layer-base.png" alt="">
-            <img src="assets/portfolio-v6/preview-2026-left-7-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-7-overlay-1600.png 1600w, assets/portfolio-v6/preview-2026-left-7-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Visual template editor" decoding="async">
+            <img src="assets/portfolio-v6/preview-2026-layer-base.png" alt="" decoding="async" loading="lazy">
+            <img src="assets/portfolio-v6/preview-2026-left-7-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-7-overlay-1600.png 1600w, assets/portfolio-v6/preview-2026-left-7-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Visual template editor" decoding="async" loading="lazy">
           </figure>
           <figure class="gallery-item gallery-left-8 gallery-layered gallery-gradient-blue">
-            <img src="assets/portfolio-v6/preview-2026-left-8-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-8-overlay-1600.png 1600w, assets/portfolio-v6/preview-2026-left-8-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop video editing workspace" decoding="async">
+            <img src="assets/portfolio-v6/preview-2026-left-8-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-8-overlay-1600.png 1600w, assets/portfolio-v6/preview-2026-left-8-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop video editing workspace" decoding="async" loading="lazy">
           </figure>
-          <figure class="gallery-item gallery-left-9"><img src="assets/portfolio-v6/preview-2026-left-9.png" alt="Desktop project management interface" decoding="async"></figure>
+          <figure class="gallery-item gallery-left-9"><img src="assets/portfolio-v6/preview-2026-left-9.png" alt="Desktop project management interface" decoding="async" loading="lazy"></figure>
         </div>
 
         <div class="gallery-column">
-          <figure class="gallery-item gallery-right-1"><img src="assets/portfolio-v6/preview-2026-right-1.png" srcset="assets/portfolio-v6/preview-2026-right-1-1600.png 1600w, assets/portfolio-v6/preview-2026-right-1.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile editor shown in hand" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-2"><img src="assets/portfolio-v6/preview-2026-right-2.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-2-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-2.png?rev=2 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop media creation system" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-3"><img src="assets/portfolio-v6/preview-2026-right-3.png" srcset="assets/portfolio-v6/preview-2026-right-3-1600.png 1600w, assets/portfolio-v6/preview-2026-right-3.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Media mode selection interface" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-4"><img src="assets/portfolio-v6/preview-2026-right-4.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-4-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-4.png?rev=2 3712w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Multi-screen editing experience" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-5"><img src="assets/portfolio-v6/preview-2026-right-5.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-5-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-5.png?rev=2 4096w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Creator workspace in use" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-6"><img src="assets/portfolio-v6/preview-2026-right-6.png" srcset="assets/portfolio-v6/preview-2026-right-6-1600.png 1600w, assets/portfolio-v6/preview-2026-right-6.png 1990w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop creative project gallery" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-7"><img src="assets/portfolio-v6/preview-2026-right-7.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-7-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-7.png?rev=2 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop asset management interface" decoding="async"></figure>
-          <figure class="gallery-item gallery-right-8"><img src="assets/portfolio-v6/preview-2026-right-8.png" srcset="assets/portfolio-v6/preview-2026-right-8-1600.png 1600w, assets/portfolio-v6/preview-2026-right-8.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile portrait editing interface" decoding="async"></figure>
+          <figure class="gallery-item gallery-right-1"><img src="assets/portfolio-v6/preview-2026-right-1.png" srcset="assets/portfolio-v6/preview-2026-right-1-1600.png 1600w, assets/portfolio-v6/preview-2026-right-1.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile editor shown in hand" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-2"><img src="assets/portfolio-v6/preview-2026-right-2.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-2-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-2.png?rev=2 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop media creation system" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-3"><img src="assets/portfolio-v6/preview-2026-right-3.png" srcset="assets/portfolio-v6/preview-2026-right-3-1600.png 1600w, assets/portfolio-v6/preview-2026-right-3.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Media mode selection interface" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-4"><img src="assets/portfolio-v6/preview-2026-right-4.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-4-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-4.png?rev=2 3712w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Multi-screen editing experience" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-5"><img src="assets/portfolio-v6/preview-2026-right-5.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-5-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-5.png?rev=2 4096w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Creator workspace in use" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-6"><img src="assets/portfolio-v6/preview-2026-right-6.png" srcset="assets/portfolio-v6/preview-2026-right-6-1600.png 1600w, assets/portfolio-v6/preview-2026-right-6.png 1990w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop creative project gallery" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-7"><img src="assets/portfolio-v6/preview-2026-right-7.png?rev=2" srcset="assets/portfolio-v6/preview-2026-right-7-1600.png?rev=2 1600w, assets/portfolio-v6/preview-2026-right-7.png?rev=2 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Desktop asset management interface" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-right-8"><img src="assets/portfolio-v6/preview-2026-right-8.png" srcset="assets/portfolio-v6/preview-2026-right-8-1600.png 1600w, assets/portfolio-v6/preview-2026-right-8.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile portrait editing interface" decoding="async" loading="lazy"></figure>
         </div>
       </div>
     </section>
@@ -3905,8 +3908,8 @@
         <div class="about-grid">
           <div class="about-profile">
             <div class="about-banner reveal" aria-hidden="true">
-              <img src="assets/portfolio-v6/about-banner-base.png" alt="">
-              <img src="assets/portfolio-v6/about-banner-overlay.png" alt="">
+              <img src="assets/portfolio-v6/about-banner-base.png" alt="" decoding="async" loading="lazy">
+              <img src="assets/portfolio-v6/about-banner-overlay.png" alt="" decoding="async" loading="lazy">
             </div>
 
             <header class="about-identity reveal">
@@ -3930,7 +3933,7 @@
                     <div class="company-line"><span>得物</span><span class="divider"></span><span>Exprience designer</span></div>
                     <p class="company-period">Poizon Technology Co. Ltd</p>
                   </div>
-                  <div class="company-logo company-logo--poizon"><img src="assets/portfolio-v4/info-poizon.svg" alt="POIZON"></div>
+                  <div class="company-logo company-logo--poizon"><img src="assets/portfolio-v4/info-poizon.svg" alt="POIZON" loading="lazy"></div>
                 </div>
               </article>
 
@@ -3941,7 +3944,7 @@
                     <div class="company-line"><span>字节跳动</span><span class="divider"></span><span>Exprience designer</span></div>
                     <p class="company-period">ByteDance Technology Co. Ltd</p>
                   </div>
-                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="ByteDance"></div>
+                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="ByteDance" decoding="async" loading="lazy"></div>
                 </div>
               </article>
 
@@ -3952,7 +3955,7 @@
                     <div class="company-line"><span>Camera 360</span><span class="divider"></span><span>Exprience designer</span></div>
                     <p class="company-period">ChengDu PinGuo Technology Co. Ltd</p>
                   </div>
-                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="Camera 360"></div>
+                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="Camera 360" decoding="async" loading="lazy"></div>
                 </div>
               </article>
 
@@ -3963,7 +3966,7 @@
                     <div class="company-line"><span>成都博物馆</span><span class="divider"></span><span>vision designer</span></div>
                     <p class="company-period">ChengDu Museum</p>
                   </div>
-                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="ChengDu Museum"></div>
+                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="ChengDu Museum" decoding="async" loading="lazy"></div>
                 </div>
               </article>
             </div>
@@ -3989,7 +3992,7 @@
         <div class="works-track" data-works-track>
           <div class="works-set" data-works-set>
               <article class="work-card" data-project="capcut-design-language" data-project-year="2023年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt=""><img src="assets/portfolio-v6/work-capcut.png" alt="CapCut design language project cover"></div>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-capcut.png" alt="CapCut design language project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>剪映设计语言 Design Language</h3>
                   <p>Elevating Design Expression for CapCut’s Next Chapter</p>
@@ -3997,7 +4000,7 @@
               </article>
 
               <article class="work-card" data-project="salad-video" data-project-year="2018 - 2022">
-                <div class="work-cover"><img src="assets/portfolio-v6/work-base.png" alt="Salad Video aesthetic editor project cover"></div>
+                <div class="work-cover"><img src="assets/portfolio-v6/work-base.png" alt="Salad Video aesthetic editor project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>Salad Video</h3>
                   <p>Video Templates &amp; Aesthetic Effects Editor</p>
@@ -4005,7 +4008,7 @@
               </article>
 
               <article class="work-card" data-project="dreamina" data-project-year="2024年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt=""><img src="assets/portfolio-v6/work-dreamina.png" alt="Dreamina AI image and video creation tool project cover"></div>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-dreamina.png" alt="Dreamina AI image and video creation tool project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>即梦 Dreamina</h3>
                   <p>Exploring the Future of AI Image &amp; Video Creation Tools</p>
@@ -4013,7 +4016,7 @@
               </article>
 
               <article class="work-card" data-project="capcut-lite" data-project-year="2023年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt=""><img src="assets/portfolio-v6/work-capcut-lite.png" alt="CapCut Lite editor project cover"></div>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-capcut-lite.png" alt="CapCut Lite editor project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>剪映模版编辑器 CapCut Lite Editor</h3>
                   <p>A complete redesign of the visual language and editing experience.</p>
@@ -4021,7 +4024,7 @@
               </article>
 
               <article class="work-card" data-project="blurrr" data-project-year="2019年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt=""><img src="assets/portfolio-v6/work-blurrr.png" alt="Blurrr video editing app project cover"></div>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-blurrr.png" alt="Blurrr video editing app project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>Blurrr</h3>
                   <p>Video Editing for Anime, Film, Gaming &amp; Idol Communities</p>
@@ -4078,7 +4081,8 @@
   <script>
     const body = document.body;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const lenis = !prefersReducedMotion && window.Lenis
+    const supportsDesktopMotion = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const lenis = !prefersReducedMotion && supportsDesktopMotion && window.Lenis
       ? new Lenis({
           lerp: 0.14,
           smoothWheel: true,
@@ -4647,7 +4651,7 @@
     };
 
     const waitForHomeAssets = () => {
-      const homeImages = [...document.querySelectorAll('.topbar img, #home img')];
+      const homeImages = [...document.querySelectorAll('.topbar img, #home img:not([loading="lazy"])')];
       const fontReady = document.fonts?.ready
         ? document.fonts.ready.catch(() => undefined)
         : Promise.resolve();
@@ -4655,7 +4659,7 @@
         fontReady,
         ...homeImages.map(waitForHomeImage)
       ]);
-      const safetyTimeout = new Promise((resolve) => window.setTimeout(resolve, 6000));
+      const safetyTimeout = new Promise((resolve) => window.setTimeout(resolve, 2400));
       return Promise.race([assetsReady, safetyTimeout]);
     };
 
@@ -4925,7 +4929,7 @@
           image.height = asset.height;
           image.alt = `${detail.name} 作品详情 ${index + 1}`;
           image.decoding = 'async';
-          image.loading = 'eager';
+          image.loading = index < 2 ? 'eager' : 'lazy';
           image.fetchPriority = index < 2 ? 'high' : 'auto';
 
           const showDecodedImage = async () => {
