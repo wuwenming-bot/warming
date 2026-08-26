@@ -1,0 +1,7 @@
+# This workspace also contains design references and generated previews.
+# Only the production site files are force-added to the deployment repository.
+*
+!.gitignore
+!design-language.html
+!vercel.json
+
