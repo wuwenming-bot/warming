@@ -33,6 +33,13 @@
       --page-gutter: 16px;
       --content: 920px;
       --project-detail-content: 1200px;
+      --type-title: 27px;
+      --type-description: 18px;
+      --type-label: 14px;
+      --line-title: 34px;
+      --line-description: 24px;
+      --line-label: 20px;
+      --mobile-info-gutter: 48px;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
       --ease-pop: cubic-bezier(0.34, 1.26, 0.64, 1);
     }
@@ -1264,7 +1271,7 @@
     .project-detail-title {
       color: var(--ink);
       font-family: "Montserrat", Arial, sans-serif;
-      font-size: 27px;
+      font-size: var(--type-title);
       font-weight: 500;
       line-height: normal;
     }
@@ -1273,7 +1280,7 @@
     .project-detail-name {
       color: var(--secondary);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
-      font-size: 16px;
+      font-size: var(--type-label);
       font-weight: 500;
       line-height: normal;
     }
@@ -2426,12 +2433,11 @@
     }
 
     .about-identity h2,
-    .about-identity p,
     .experience-title,
     .skills-title {
       color: var(--ink);
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 27px;
+      font-size: var(--type-title);
       font-weight: 400;
       line-height: 34px;
       letter-spacing: 0;
@@ -2442,13 +2448,15 @@
       right: calc(100% + 4px);
       color: var(--muted);
       font-family: "Montserrat", Arial, sans-serif;
-      font-size: 14px;
+      font-size: var(--type-label);
       font-weight: 600;
     }
 
     .about-identity p {
       margin: 0;
       color: var(--secondary);
+      font-size: var(--type-description);
+      line-height: var(--line-description);
     }
 
     .about-copy {
@@ -2457,7 +2465,7 @@
       margin: 240px max(20px, calc((100% - 920px) / 2)) 0 auto;
       color: var(--secondary);
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 18px;
+      font-size: var(--type-description);
       font-weight: 400;
       line-height: 24px;
       letter-spacing: 0;
@@ -2494,7 +2502,7 @@
 
     .experience-date {
       color: var(--secondary);
-      font-size: 14px;
+      font-size: var(--type-label);
       line-height: 24px;
       letter-spacing: -0.4px;
       text-transform: capitalize;
@@ -2513,7 +2521,7 @@
       gap: 12px;
       align-items: center;
       color: var(--ink);
-      font-size: 18px;
+      font-size: var(--type-description);
       line-height: 24px;
       white-space: nowrap;
     }
@@ -2521,7 +2529,7 @@
     .company-period {
       margin-top: 4px;
       color: var(--secondary);
-      font-size: 14.4px;
+      font-size: var(--type-label);
       line-height: 20px;
       white-space: nowrap;
     }
@@ -2557,7 +2565,7 @@
       background-clip: text;
       -webkit-background-clip: text;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 27px;
+      font-size: var(--type-title);
       font-weight: 400;
       line-height: 36px;
       text-align: right;
@@ -2582,12 +2590,11 @@
       gap: 0;
     }
 
-    .works-intro h2,
-    .works-intro p {
+    .works-intro h2 {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 27px;
+      font-size: var(--type-title);
       font-weight: 400;
-      line-height: 34px;
+      line-height: var(--line-title);
       letter-spacing: 0;
     }
 
@@ -2595,6 +2602,11 @@
       width: 800px;
       max-width: 100%;
       color: var(--secondary);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: var(--type-description);
+      font-weight: 400;
+      line-height: var(--line-description);
+      letter-spacing: 0;
     }
 
     .works-marquee {
@@ -2653,14 +2665,16 @@
     .work-copy h3,
     .work-copy p {
       font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", sans-serif;
-      font-size: 16px;
+      font-size: var(--type-description);
       font-weight: 400;
-      line-height: 24px;
+      line-height: var(--line-description);
       letter-spacing: 0;
     }
 
     .work-copy p {
       color: var(--muted);
+      font-size: var(--type-label);
+      line-height: var(--line-label);
       text-transform: capitalize;
     }
 
@@ -2684,15 +2698,20 @@
       gap: 16px;
       align-items: center;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 27px;
       font-weight: 400;
-      line-height: 34px;
+      line-height: var(--line-title);
+    }
+
+    .footer-contact-copy p:first-child {
+      font-size: var(--type-title);
     }
 
     .footer-contact-copy p:last-child {
       width: 600px;
       max-width: calc(100% - 40px);
       color: var(--secondary);
+      font-size: var(--type-description);
+      line-height: var(--line-description);
     }
 
     .footer-contact-button {
@@ -2719,7 +2738,7 @@
       margin: 240px auto 0;
       padding-bottom: 40px;
       color: var(--secondary);
-      font-size: 14px;
+      font-size: var(--type-label);
       line-height: 21px;
       letter-spacing: -0.4px;
       text-transform: capitalize;
@@ -2885,7 +2904,7 @@
       justify-content: flex-end;
       color: var(--topbar-primary);
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 18px;
+      font-size: var(--type-description);
       font-weight: 400;
       line-height: 21px;
       white-space: nowrap;
@@ -2974,7 +2993,7 @@
 
     .profile-kicker {
       color: var(--topbar-muted);
-      font-size: 14px;
+      font-size: var(--type-label);
       font-weight: 400;
       line-height: 17px;
     }
@@ -2982,7 +3001,7 @@
     .profile-title {
       margin: 16px 0 0;
       color: var(--topbar-primary);
-      font-size: 23.4px;
+      font-size: var(--type-title);
       font-weight: 500;
       line-height: 30px;
     }
@@ -2990,7 +3009,7 @@
     .profile-meta {
       margin-top: 16px;
       color: var(--topbar-muted);
-      font-size: 14px;
+      font-size: var(--type-label);
       line-height: 17px;
     }
 
@@ -3546,7 +3565,7 @@
       gap: 48px;
       align-items: center;
       color: #c0c0c0;
-      font-size: 14px;
+      font-size: var(--type-label);
       font-weight: 400;
       line-height: normal;
       white-space: nowrap;
@@ -3562,14 +3581,14 @@
 
     .hero-card-copy p {
       margin: 0;
-      font-size: 14px;
+      font-size: var(--type-label);
       font-weight: 400;
       line-height: normal;
     }
 
     .hero-card-copy h2 {
       margin: 24px 0 0;
-      font-size: 27px;
+      font-size: var(--type-title);
       font-weight: 400;
       line-height: 30px;
       letter-spacing: 0;
@@ -3725,19 +3744,109 @@
     }
 
     @media (max-width: 640px) {
+      :root {
+        --type-title: 24px;
+        --type-description: 16px;
+        --type-label: 12px;
+        --line-title: 30px;
+        --line-description: 22px;
+        --line-label: 18px;
+      }
+
       .topbar { top: 16px; }
       .topbar-section-window { width: 70px; }
-      .topbar-summary { font-size: 16px; }
-      .profile-title { font-size: 21px; line-height: 27px; }
+      .topbar-panel {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .topbar-summary { font-size: var(--type-description); }
+      .profile-title { font-size: var(--type-title); line-height: var(--line-title); }
       .hero-meta { width: calc(100% - 32px); font-size: 12px; }
       .hero-meta-left { gap: clamp(28px, 9vw, 64px); }
+
+      .about-banner,
+      .about-identity,
+      .about-copy,
+      .experience,
+      .skills,
+      .works-inner,
+      .works-controls,
+      .footer-contact,
+      .footer-meta,
+      .project-detail-header {
+        width: calc(100% - (var(--mobile-info-gutter) * 2));
+      }
+
+      .about-copy {
+        max-width: none;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .about-identity h2,
+      .experience-title,
+      .skills-title,
+      .skills-list,
+      .works-intro h2,
+      .footer-contact-copy p:first-child,
+      .project-detail-title {
+        font-size: var(--type-title);
+        line-height: var(--line-title);
+      }
+
+      .profile-title,
+      .hero-card-copy h2,
+      #about-title,
+      #experience-title,
+      .skills-title,
+      #works-title,
+      .footer-contact-copy p:first-child,
+      .project-detail-title {
+        font-size: 24px;
+        line-height: 30px;
+      }
+
+      .about-identity p,
+      .about-copy,
+      .company-line,
+      .works-intro p,
+      .work-copy h3,
+      .footer-contact-copy p:last-child,
+      .topbar-summary {
+        font-size: var(--type-description);
+        line-height: var(--line-description);
+      }
+
+      .about-identity h2::before,
+      .experience-date,
+      .company-period,
+      .work-copy p,
+      .footer-meta,
+      .profile-kicker,
+      .profile-meta,
+      .project-detail-year,
+      .project-detail-name,
+      .hero-card-meta,
+      .hero-card-copy p {
+        font-size: var(--type-label);
+        line-height: var(--line-label);
+      }
+
+      .skills-list {
+        width: calc(100% - 72px);
+      }
+
+      .experience-row { gap: 24px; }
+      .footer-contact { margin-right: auto; margin-left: auto; }
+      .footer-contact-copy,
+      .footer-contact-copy p:last-child { width: 100%; max-width: 100%; }
+      .footer-contact-button { width: min(220px, 100%); }
 
       .work-card,
       .work-cover { width: min(88vw, 700px); }
       .work-card { flex-basis: min(88vw, 700px); }
       .work-cover { height: auto; aspect-ratio: 7 / 5; }
-      .works-controls { width: calc(100% - 32px); }
-      .footer-meta { margin-top: 160px; }
+      .footer-meta { margin-top: 240px; }
       .hero-card-stage {
         top: 48%;
         zoom: 0.58;
@@ -4309,21 +4418,23 @@
       };
 
       profilePopover.addEventListener('pointerenter', () => {
-        if (window.matchMedia('(hover: hover)').matches) setProfileOpen(true);
+        if (supportsDesktopMotion) setProfileOpen(true);
       });
       profilePopover.addEventListener('pointerleave', () => {
-        if (window.matchMedia('(hover: hover)').matches) setProfileOpen(false);
+        if (supportsDesktopMotion) setProfileOpen(false);
       });
-      profilePopover.addEventListener('focusin', () => setProfileOpen(true));
+      profilePopover.addEventListener('focusin', () => {
+        if (supportsDesktopMotion) setProfileOpen(true);
+      });
       profilePopover.addEventListener('focusout', (event) => {
         if (!profilePopover.contains(event.relatedTarget)) setProfileOpen(false);
       });
       profileTrigger.addEventListener('click', () => {
-        if (window.matchMedia('(hover: none)').matches) {
-          setProfileOpen(!profilePopover.classList.contains('is-profile-open'));
-        } else {
-          setProfileOpen(true);
-        }
+        if (supportsDesktopMotion) setProfileOpen(true);
+      });
+      profilePopover.addEventListener('click', (event) => {
+        if (supportsDesktopMotion || event.target.closest('.profile-action')) return;
+        setProfileOpen(!profilePopover.classList.contains('is-profile-open'));
       });
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') setProfileOpen(false);
@@ -4535,7 +4646,9 @@
       heroFrame7AnimationFrame = requestAnimationFrame(animateBackground);
     };
 
-    if (heroGradientCard && heroProfileStack && window.matchMedia('(hover: hover)').matches) {
+    let triggerHeroCardSwing = () => {};
+
+    if (heroGradientCard && heroProfileStack && supportsDesktopMotion) {
       const heroFrame7HoverTargets = [heroGradientCard, heroProfileStack];
       const isInsideHeroCardArea = (node) => heroFrame7HoverTargets.some(
         (target) => node && (target === node || target.contains(node))
@@ -4546,6 +4659,16 @@
         target.addEventListener('pointerleave', (event) => {
           if (!isInsideHeroCardArea(event.relatedTarget)) setHeroFrame7Mode(false);
         });
+      });
+    }
+
+    if (heroCardStage && !supportsDesktopMotion) {
+      heroCardStage.addEventListener('click', (event) => {
+        if (!event.target.closest('.hero-tilt-card')) return;
+        const stageRect = heroCardStage.getBoundingClientRect();
+        const tappedRightSide = event.clientX >= stageRect.left + (stageRect.width / 2);
+        triggerHeroCardSwing(tappedRightSide ? -1 : 1);
+        setHeroFrame7Mode(!heroFrame7ModeActive);
       });
     }
 
@@ -4584,6 +4707,12 @@
 
       const startCardMotion = () => {
         if (!cardMotion.frame) cardMotion.frame = requestAnimationFrame(renderCardMotion);
+      };
+
+      triggerHeroCardSwing = (direction) => {
+        cardMotion.mainVelocity = clamp(cardMotion.mainVelocity + (direction * 0.78), -1.05, 1.05);
+        cardMotion.backVelocity = clamp(cardMotion.backVelocity + (direction * 0.48), -0.72, 0.72);
+        startCardMotion();
       };
 
       heroCardStage.addEventListener('pointermove', (event) => {
