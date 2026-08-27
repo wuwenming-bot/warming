@@ -2341,12 +2341,13 @@
       object-fit: cover;
     }
 
-    .gallery-wide--primary { aspect-ratio: 1424 / 860.589; }
+    .gallery-wide--primary { aspect-ratio: 4272 / 2525; }
 
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
+      margin-top: 0;
     }
 
     .gallery-column {
@@ -3368,6 +3369,30 @@
 
     .hero.is-frame7 .hero-card-backdrop { opacity: 1; }
 
+    /* Some iOS browser shells lose a clipped backdrop-filter compositing layer. */
+    body.is-card-webview-fallback .hero-card-backdrop {
+      display: none;
+    }
+
+    body.is-card-webview-fallback .hero.is-frame7 .hero-gradient-card,
+    body.is-card-webview-fallback .hero.is-frame7 .hero-profile-glass-layer {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 145% 145%;
+    }
+
+    body.is-card-webview-fallback .hero.is-frame7 .hero-gradient-card {
+      background-color: rgba(0, 0, 0, 0.11);
+    }
+
+    body.is-card-webview-fallback .hero.is-frame7 .hero-profile-glass-layer {
+      opacity: 1;
+      background-color: rgba(250, 250, 250, 0.82);
+      transition-delay: 0ms;
+    }
+
     .hero-card-stage {
       position: absolute;
       top: 49%;
@@ -3753,6 +3778,28 @@
         --line-label: 18px;
       }
 
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        overflow-x: clip;
+        overscroll-behavior-x: none;
+      }
+
+      body {
+        min-width: 0;
+        position: relative;
+        touch-action: pan-y pinch-zoom;
+      }
+
+      main,
+      .site-footer {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip;
+      }
+
       .topbar { top: 16px; }
       .topbar-section-window { width: 70px; }
       .topbar-panel {
@@ -3974,8 +4021,8 @@
     <section class="gallery" id="gallery" data-topbar-theme="light" aria-label="Selected visual work gallery">
       <figure class="gallery-wide gallery-wide--primary">
         <img
-          src="assets/portfolio-v6/preview-2026-wide-v3-1600.webp"
-          srcset="assets/portfolio-v6/preview-2026-wide-v3-1600.webp 1600w, assets/portfolio-v6/preview-2026-wide-v3-2880.png 2880w, assets/portfolio-v6/preview-2026-wide-v3.png 4096w"
+          src="assets/portfolio-v6/preview-2026-wide-v3-1600.png?rev=4"
+          srcset="assets/portfolio-v6/preview-2026-wide-v3-1600.png?rev=4 1600w, assets/portfolio-v6/preview-2026-wide-v3-2880.png?rev=4 2880w, assets/portfolio-v6/preview-2026-wide-v3.png?rev=4 4272w"
           sizes="calc(100vw - 16px)"
           alt="Powerful AMV Editor product preview"
           decoding="async"
@@ -3991,7 +4038,7 @@
             <img src="assets/portfolio-v6/preview-2026-left-2-overlay.png" srcset="assets/portfolio-v6/preview-2026-left-2-overlay-1600.webp 1600w, assets/portfolio-v6/preview-2026-left-2-overlay.png 2500w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile video editing interface" decoding="async" loading="lazy">
           </figure>
           <figure class="gallery-item gallery-left-3"><img src="assets/portfolio-v6/preview-2026-left-3.png" srcset="assets/portfolio-v6/preview-2026-left-3-1600.webp 1600w, assets/portfolio-v6/preview-2026-left-3.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Tablet creative workspace" decoding="async" loading="lazy"></figure>
-          <figure class="gallery-item gallery-left-4"><img src="assets/portfolio-v6/preview-2026-left-4.png" srcset="assets/portfolio-v6/preview-2026-left-4-1600.webp 1600w, assets/portfolio-v6/preview-2026-left-4.png 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile AI creation interface" decoding="async" loading="lazy"></figure>
+          <figure class="gallery-item gallery-left-4"><img src="assets/portfolio-v6/preview-2026-left-4.png?rev=4" srcset="assets/portfolio-v6/preview-2026-left-4-1600.png?rev=4 1600w, assets/portfolio-v6/preview-2026-left-4.png?rev=4 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="VideoBeats mobile editing interface" decoding="async" loading="lazy"></figure>
           <figure class="gallery-item gallery-left-5 gallery-layered">
             <img src="assets/portfolio-v6/preview-2026-layer-base.webp" alt="" decoding="async" loading="lazy">
             <img src="assets/portfolio-v6/preview-2026-left-5-overlay.png?rev=2" srcset="assets/portfolio-v6/preview-2026-left-5-overlay-1600.webp?rev=2 1600w, assets/portfolio-v6/preview-2026-left-5-overlay.png?rev=2 2124w" sizes="(max-width: 640px) calc(100vw - 16px), calc((100vw - 24px) / 2)" alt="Mobile music creation interface" decoding="async" loading="lazy">
@@ -4197,6 +4244,8 @@
   <script src="assets/vendor/lenis.min.js"></script>
   <script>
     const body = document.body;
+    const usesCardWebviewFallback = /MicroMessenger|Quark/i.test(navigator.userAgent);
+    body.classList.toggle('is-card-webview-fallback', usesCardWebviewFallback);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const supportsDesktopMotion = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const lenis = !prefersReducedMotion && supportsDesktopMotion && window.Lenis
@@ -4590,6 +4639,12 @@
       const frame7Gradient = formatFrame7Gradient(heroFrame7Palette, progress);
       heroFrame7Background.style.backgroundImage = frame7Gradient;
       heroFrame7Background.style.opacity = progress.toFixed(4);
+      if (usesCardWebviewFallback) {
+        const backSurface = `linear-gradient(rgba(0, 0, 0, 0.11), rgba(0, 0, 0, 0.11)), ${frame7Gradient}`;
+        const mainSurface = `linear-gradient(rgba(250, 250, 250, 0.82), rgba(250, 250, 250, 0.82)), ${frame7Gradient}`;
+        if (heroGradientCard) heroGradientCard.style.backgroundImage = progress > 0 ? backSurface : '';
+        if (heroProfileGlass) heroProfileGlass.style.backgroundImage = progress > 0 ? mainSurface : '';
+      }
       if (heroBackBackdrop) {
         heroBackBackdrop.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.11), rgba(0, 0, 0, 0.11)), ${frame7Gradient}`;
       }
