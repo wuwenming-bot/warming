@@ -1340,6 +1340,10 @@
       opacity: 1;
     }
 
+    .project-detail-media.is-loaded {
+      background: transparent;
+    }
+
     .project-detail-media.is-error::after {
       position: absolute;
       inset: 0;
@@ -2615,7 +2619,12 @@
       margin: 0;
       overflow: hidden;
       touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
     }
+
+    .works-marquee.is-dragging { cursor: grabbing; }
 
     .works-track {
       display: flex;
@@ -2798,10 +2807,10 @@
 
       .work-card,
       .work-cover {
-        width: min(84vw, 600px);
+        width: min(62vw, 600px);
       }
 
-      .work-card { flex-basis: min(84vw, 600px); }
+      .work-card { flex-basis: min(62vw, 600px); }
       .work-cover { height: auto; aspect-ratio: 3 / 2; }
 
       .works-track { margin-left: 16px; }
@@ -3697,7 +3706,7 @@
     }
 
     body.is-home-entering .topbar,
-    body.is-home-entering .hero-card-stage {
+    body.is-loading .hero-card-stage {
       pointer-events: none;
     }
 
@@ -3890,8 +3899,8 @@
       .footer-contact-button { width: min(220px, 100%); }
 
       .work-card,
-      .work-cover { width: min(88vw, 700px); }
-      .work-card { flex-basis: min(88vw, 700px); }
+      .work-cover { width: min(62vw, 700px); }
+      .work-card { flex-basis: min(62vw, 700px); }
       .work-cover { height: auto; aspect-ratio: 7 / 5; }
       .footer-meta { margin-top: 240px; }
       .hero-card-stage {
@@ -3903,6 +3912,29 @@
         min-height: 660px;
         font-size: 24px;
       }
+
+      .hero-logo-row {
+        width: min(320px, calc(100% - 32px));
+        height: 32px;
+      }
+
+      .hero-logo-track,
+      .hero-logo-set {
+        height: 32px;
+      }
+
+      .hero-logo-set {
+        gap: 32px;
+        padding-right: 32px;
+      }
+
+      .hero-logo-row img {
+        width: auto !important;
+        max-width: 22%;
+        height: 32px;
+      }
+
+      .works-control:hover { background: #fff; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -4412,11 +4444,19 @@
 
     updateHeroCardBackdrops();
     window.addEventListener('resize', updateHeroCardBackdrops, { passive: true });
-    const createDetailImages = (folder, heights) => heights.map((height, index) => ({
-      src: `assets/project-details/${folder}/${index + 1}.png`,
-      width: 3840,
-      height
-    }));
+    const detailResponsiveWidths = [960, 1600, 2400];
+    const createDetailImages = (folder, heights) => heights.map((height, index) => {
+      const basename = `assets/project-details/${folder}/${index + 1}`;
+      return {
+        src: `${basename}.png`,
+        sources: detailResponsiveWidths.map((width) => ({
+          width,
+          src: `${basename}-${width}.webp`
+        })),
+        width: 3840,
+        height
+      };
+    });
     const projectDetails = {
       'salad-video': {
         year: '2018 - 2022',
@@ -5016,6 +5056,8 @@
 
     if (worksSet) {
       const primaryWorksSet = worksSet.querySelector('[data-works-set]');
+      let suppressWorksClick = false;
+      let suppressWorksClickTimer = 0;
 
       if (primaryWorksSet) {
         let worksVisible = false;
@@ -5039,6 +5081,7 @@
         let worksOffset = 0;
         let previousFrameTime = performance.now();
         let worksJump = null;
+        let worksDrag = null;
 
         const normalizeWorksOffset = () => {
           const setWidth = primaryWorksSet.getBoundingClientRect().width;
@@ -5050,7 +5093,9 @@
         const nudgeWorks = (direction) => {
           const firstCard = primaryWorksSet.querySelector('.work-card');
           if (!firstCard) return;
-          const distance = (firstCard.getBoundingClientRect().width + 12) * 2 * direction;
+          const setStyle = getComputedStyle(primaryWorksSet);
+          const gap = Number.parseFloat(setStyle.columnGap || setStyle.gap) || 0;
+          const distance = (firstCard.getBoundingClientRect().width + gap) * direction;
 
           if (prefersReducedMotion) {
             worksOffset += distance;
@@ -5065,12 +5110,70 @@
             distance,
             applied: 0
           };
+          currentSpeed = 0;
         };
 
-        worksPrevious?.addEventListener('click', () => nudgeWorks(1));
-        worksNext?.addEventListener('click', () => nudgeWorks(-1));
-        worksMarquee?.addEventListener('pointerenter', () => { targetSpeed = hoverSpeed; });
-        worksMarquee?.addEventListener('pointerleave', () => { targetSpeed = normalSpeed; });
+        const bindWorksControl = (button, direction) => {
+          button?.addEventListener('click', () => {
+            nudgeWorks(direction);
+            button.blur();
+          });
+        };
+
+        bindWorksControl(worksPrevious, 1);
+        bindWorksControl(worksNext, -1);
+        worksMarquee?.addEventListener('pointerenter', (event) => {
+          if (event.pointerType === 'mouse') targetSpeed = hoverSpeed;
+        });
+        worksMarquee?.addEventListener('pointerleave', (event) => {
+          if (event.pointerType === 'mouse' && !worksDrag) targetSpeed = normalSpeed;
+        });
+
+        const endWorksDrag = (event, cancelled = false) => {
+          if (!worksDrag || (event.pointerId !== undefined && event.pointerId !== worksDrag.pointerId)) return;
+          const moved = worksDrag.moved;
+          worksDrag = null;
+          worksMarquee?.classList.remove('is-dragging');
+          targetSpeed = event.pointerType === 'mouse' && !cancelled ? hoverSpeed : normalSpeed;
+          if (moved && !cancelled) {
+            suppressWorksClick = true;
+            window.clearTimeout(suppressWorksClickTimer);
+            suppressWorksClickTimer = window.setTimeout(() => {
+              suppressWorksClick = false;
+            }, 280);
+          }
+        };
+
+        worksMarquee?.addEventListener('pointerdown', (event) => {
+          if (event.pointerType === 'mouse' && event.button !== 0) return;
+          worksJump = null;
+          currentSpeed = 0;
+          targetSpeed = 0;
+          worksDrag = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            lastX: event.clientX,
+            moved: false
+          };
+          worksMarquee.classList.add('is-dragging');
+          worksMarquee.setPointerCapture?.(event.pointerId);
+        });
+
+        worksMarquee?.addEventListener('pointermove', (event) => {
+          if (!worksDrag || event.pointerId !== worksDrag.pointerId) return;
+          const deltaX = event.clientX - worksDrag.lastX;
+          const totalX = event.clientX - worksDrag.startX;
+          worksDrag.lastX = event.clientX;
+          if (Math.abs(totalX) > 5) worksDrag.moved = true;
+          if (!worksDrag.moved) return;
+          event.preventDefault();
+          worksOffset += deltaX;
+          normalizeWorksOffset();
+          worksSet.style.transform = `translate3d(${worksOffset}px, 0, 0)`;
+        }, { passive: false });
+
+        worksMarquee?.addEventListener('pointerup', (event) => endWorksDrag(event));
+        worksMarquee?.addEventListener('pointercancel', (event) => endWorksDrag(event, true));
 
         if (!prefersReducedMotion) {
           const moveWorks = (time) => {
@@ -5083,7 +5186,7 @@
             const delta = Math.min((time - previousFrameTime) / 1000, 0.05);
             previousFrameTime = time;
             currentSpeed += (targetSpeed - currentSpeed) * (1 - Math.exp(-delta * 4.5));
-            worksOffset -= currentSpeed * delta;
+            if (!worksJump && !worksDrag) worksOffset -= currentSpeed * delta;
 
             if (worksJump) {
               const progress = Math.min((time - worksJump.start) / worksJump.duration, 1);
@@ -5106,11 +5209,94 @@
       let projectDetailReturnFocus = null;
       let projectDetailCloseTimer = 0;
       let projectDetailImageSession = 0;
+      let projectDetailAbortController = null;
+      let projectDetailLoadQueue = [];
+      let activeProjectDetailLoads = 0;
+      const projectDetailObjectUrls = new Set();
+      const maxProjectDetailLoads = 3;
+
+      const chooseProjectDetailSource = (asset) => {
+        const displayWidth = projectDetailGallery?.clientWidth || Math.min(window.innerWidth - 40, 1200);
+        const pixelRatio = Math.min(Math.max(window.devicePixelRatio || 1, 1), 2);
+        const requestedWidth = Math.ceil(displayWidth * pixelRatio);
+        return asset.sources.find((source) => source.width >= requestedWidth)
+          || asset.sources[asset.sources.length - 1];
+      };
+
+      const decodeProjectDetailImage = async (image) => {
+        if (typeof image.decode === 'function') {
+          await image.decode();
+          return;
+        }
+        if (image.complete) return;
+        await new Promise((resolve, reject) => {
+          image.addEventListener('load', resolve, { once: true });
+          image.addEventListener('error', reject, { once: true });
+        });
+      };
+
+      const loadProjectDetailItem = async ({ asset, image, media, session, priority }) => {
+        if (session !== projectDetailImageSession || !media.isConnected) return;
+        const source = chooseProjectDetailSource(asset);
+
+        try {
+          const response = await fetch(source.src, {
+            cache: 'force-cache',
+            signal: projectDetailAbortController?.signal,
+            priority
+          });
+          if (!response.ok) throw new Error(`Image request failed: ${response.status}`);
+          const blob = await response.blob();
+          if (session !== projectDetailImageSession || !media.isConnected) return;
+          const objectUrl = URL.createObjectURL(blob);
+          projectDetailObjectUrls.add(objectUrl);
+          image.src = objectUrl;
+          await decodeProjectDetailImage(image);
+        } catch (error) {
+          if (error?.name === 'AbortError' || session !== projectDetailImageSession || !media.isConnected) return;
+          image.src = asset.src;
+          try {
+            await decodeProjectDetailImage(image);
+          } catch (fallbackError) {
+            media.dataset.loadState = 'error';
+            media.classList.add('is-error');
+            return;
+          }
+        }
+
+        if (session !== projectDetailImageSession || !media.isConnected) return;
+        image.loading = 'eager';
+        media.dataset.loadState = 'loaded';
+        media.classList.add('is-loaded');
+      };
+
+      const pumpProjectDetailLoads = () => {
+        while (activeProjectDetailLoads < maxProjectDetailLoads && projectDetailLoadQueue.length) {
+          const item = projectDetailLoadQueue.shift();
+          if (item.session !== projectDetailImageSession) continue;
+          activeProjectDetailLoads += 1;
+          loadProjectDetailItem(item).finally(() => {
+            activeProjectDetailLoads -= 1;
+            pumpProjectDetailLoads();
+          });
+        }
+      };
+
+      const releaseProjectDetailImages = () => {
+        projectDetailImageSession += 1;
+        projectDetailAbortController?.abort();
+        projectDetailAbortController = null;
+        projectDetailLoadQueue = [];
+        projectDetailGallery?.replaceChildren();
+        projectDetailObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+        projectDetailObjectUrls.clear();
+      };
 
       const renderProjectDetailImages = (detail) => {
         if (!projectDetailGallery) return;
+        releaseProjectDetailImages();
+        projectDetailAbortController = new AbortController();
         const imageSession = ++projectDetailImageSession;
-        projectDetailGallery.replaceChildren();
 
         detail.images.forEach((asset, index) => {
           const media = document.createElement('figure');
@@ -5121,29 +5307,22 @@
           image.height = asset.height;
           image.alt = `${detail.name} 作品详情 ${index + 1}`;
           image.decoding = 'async';
-          image.loading = index < 2 ? 'eager' : 'lazy';
+          image.loading = 'eager';
           image.fetchPriority = index < 2 ? 'high' : 'auto';
 
-          const showDecodedImage = async () => {
-            try {
-              await image.decode();
-            } catch (error) {
-              if (!image.complete || !image.naturalWidth) return;
-            }
-
-            if (imageSession !== projectDetailImageSession || !media.isConnected) return;
-            media.dataset.loadState = 'loaded';
-            media.classList.add('is-loaded');
-          };
-
           media.dataset.loadState = 'loading';
-          image.addEventListener('load', showDecodedImage, { once: true });
-          image.addEventListener('error', () => media.classList.add('is-error'), { once: true });
           media.append(image);
           projectDetailGallery.append(media);
-          image.src = asset.src;
-          if (image.complete && image.naturalWidth) showDecodedImage();
+          projectDetailLoadQueue.push({
+            asset,
+            image,
+            media,
+            session: imageSession,
+            priority: index < 2 ? 'high' : 'auto'
+          });
         });
+
+        pumpProjectDetailLoads();
       };
 
       let projectDetailScrollFrame = 0;
@@ -5190,6 +5369,7 @@
         projectDetail.classList.remove('is-open');
         projectDetail.setAttribute('aria-hidden', 'true');
         projectDetailCloseTimer = window.setTimeout(() => {
+          releaseProjectDetailImages();
           body.classList.remove('project-detail-open');
           if (lenis) lenis.start();
           projectDetailReturnFocus?.focus?.({ preventScroll: true });
@@ -5198,6 +5378,12 @@
       };
 
       worksSet.addEventListener('click', (event) => {
+        if (suppressWorksClick) {
+          event.preventDefault();
+          event.stopPropagation();
+          suppressWorksClick = false;
+          return;
+        }
         const card = event.target.closest('.work-card');
         if (!card) return;
         openProjectDetail(card.dataset.project, card);
