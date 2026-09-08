@@ -1,24 +1,34 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="has-story-site">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Wu Wenming, product experience designer portfolio.">
   <title>Wu Wenming — Product Experience Designer</title>
-  <link rel="preload" href="assets/fonts/montserrat-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/portfolio-v7/hero-card-image-1600.webp" as="image" type="image/webp">
   <link rel="preload" href="assets/portfolio-v7/paperclip-hd-384.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="assets/portfolio-scroll/scroll-story.css?v=20260908-0232">
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
   </script>
   <style>
     @font-face {
-      font-family: "Montserrat";
+      font-family: "Geist";
       font-style: normal;
-      font-weight: 400 600;
+      font-weight: 100 900;
       font-display: swap;
-      src: url("assets/fonts/montserrat-latin-400-600.woff2") format("woff2");
+      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/GeistMono-Variable.woff2") format("woff2");
     }
 
     :root {
@@ -91,7 +101,7 @@
       overflow-x: hidden;
       color: var(--ink);
       background: var(--canvas);
-      font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
@@ -325,7 +335,7 @@
       padding: 104px 24px 24px;
       overflow: hidden;
       color: var(--secondary);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       pointer-events: none;
       opacity: 0;
       filter: blur(8px);
@@ -817,7 +827,7 @@
     }
 
     .company-line > span:first-child {
-      font-family: "PingFang SC", "Montserrat", sans-serif;
+      font-family: "Geist", "PingFang SC", sans-serif;
     }
 
     .company-line .divider {
@@ -950,7 +960,7 @@
 
     .works-intro h2,
     .works-intro p {
-      font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
       font-size: 27px;
       line-height: 40px;
     }
@@ -1017,7 +1027,7 @@
     }
 
     .work-copy h3 {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+      font-family: "Geist", "PingFang SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
       font-size: inherit;
       font-weight: 500;
     }
@@ -1025,7 +1035,7 @@
     .work-copy p {
       overflow: hidden;
       color: var(--secondary);
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-weight: 500;
       margin-top: 4px;
       text-overflow: ellipsis;
@@ -1063,7 +1073,7 @@
       border-radius: 8px;
       color: var(--ink);
       background: #fff;
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-size: 12px;
       font-weight: 600;
       line-height: normal;
@@ -1270,7 +1280,7 @@
 
     .project-detail-title {
       color: var(--ink);
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-size: var(--type-title);
       font-weight: 500;
       line-height: normal;
@@ -1279,7 +1289,7 @@
     .project-detail-year,
     .project-detail-name {
       color: var(--secondary);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+      font-family: "Geist", "PingFang SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
       font-size: var(--type-label);
       font-weight: 500;
       line-height: normal;
@@ -1626,7 +1636,7 @@
 
     /* PortfolioPageFrame1 - latest Figma layout */
     body {
-      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     .topbar {
@@ -1649,7 +1659,7 @@
     .nav-link {
       min-height: 45px;
       padding: 0 12px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 14px;
       font-weight: 400;
     }
@@ -1678,7 +1688,7 @@
     .hero-meta {
       top: 50%;
       width: min(1100px, calc(100% - 80px));
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-weight: 500;
       line-height: 21px;
@@ -1696,7 +1706,7 @@
 
     .hero-meta-name::before {
       right: calc(100% + 2px);
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-size: 14px;
       font-weight: 600;
     }
@@ -1790,7 +1800,7 @@
     .about-identity h2,
     .experience-title,
     .skills-title {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 18px;
       font-weight: 400;
       line-height: 21px;
@@ -1803,14 +1813,14 @@
 
     .about-identity h2::before {
       right: calc(100% + 4px);
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-size: 14px;
       font-weight: 600;
     }
 
     .about-identity p {
       margin-top: 2px;
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-size: 14px;
       font-weight: 500;
       line-height: 21px;
@@ -1819,7 +1829,7 @@
     .about-copy {
       width: 409px;
       margin-top: 120px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 18px;
       font-weight: 400;
       line-height: 21px;
@@ -1838,7 +1848,7 @@
       background: linear-gradient(180deg, #fff 15%, rgba(255, 255, 255, 0.08) 100%);
       background-clip: text;
       -webkit-background-clip: text;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 18px;
       font-weight: 400;
       line-height: 21px;
@@ -1860,7 +1870,7 @@
     .experience-date,
     .company-line,
     .company-period {
-      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 14.4px;
       font-weight: 400;
       line-height: 19px;
@@ -1957,7 +1967,7 @@
 
     .works-intro h2,
     .works-intro p {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 400;
       letter-spacing: -0.4px;
     }
@@ -2006,7 +2016,7 @@
     }
 
     .work-copy h3 {
-      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 14.4px;
       font-weight: 400;
       line-height: 19px;
@@ -2017,7 +2027,7 @@
       margin: 0;
       overflow: visible;
       color: var(--muted);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 14px;
       font-weight: 400;
       line-height: 21px;
@@ -2068,7 +2078,7 @@
       justify-content: space-between;
       margin-top: 96px;
       color: #171717;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 10px;
       font-weight: 400;
       line-height: 12px;
@@ -2441,7 +2451,7 @@
     .experience-title,
     .skills-title {
       color: var(--ink);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-title);
       font-weight: 400;
       line-height: 34px;
@@ -2452,7 +2462,7 @@
     .about-identity h2::before {
       right: calc(100% + 4px);
       color: var(--muted);
-      font-family: "Montserrat", Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
       font-size: var(--type-label);
       font-weight: 600;
     }
@@ -2469,7 +2479,7 @@
       max-width: calc(100% - 40px);
       margin: 240px max(20px, calc((100% - 920px) / 2)) 0 auto;
       color: var(--secondary);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-description);
       font-weight: 400;
       line-height: 24px;
@@ -2569,7 +2579,7 @@
       background: linear-gradient(180deg, var(--secondary), #fff);
       background-clip: text;
       -webkit-background-clip: text;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-title);
       font-weight: 400;
       line-height: 36px;
@@ -2596,7 +2606,7 @@
     }
 
     .works-intro h2 {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-title);
       font-weight: 400;
       line-height: var(--line-title);
@@ -2607,7 +2617,7 @@
       width: 800px;
       max-width: 100%;
       color: var(--secondary);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-description);
       font-weight: 400;
       line-height: var(--line-description);
@@ -2619,12 +2629,7 @@
       margin: 0;
       overflow: hidden;
       touch-action: pan-y;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
     }
-
-    .works-marquee.is-dragging { cursor: grabbing; }
 
     .works-track {
       display: flex;
@@ -2674,7 +2679,7 @@
 
     .work-copy h3,
     .work-copy p {
-      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-description);
       font-weight: 400;
       line-height: var(--line-description);
@@ -2707,7 +2712,7 @@
       flex-direction: column;
       gap: 16px;
       align-items: center;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 400;
       line-height: var(--line-title);
     }
@@ -2913,7 +2918,7 @@
       align-items: center;
       justify-content: flex-end;
       color: var(--topbar-primary);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: var(--type-description);
       font-weight: 400;
       line-height: 21px;
@@ -3301,7 +3306,7 @@
       min-height: 700px;
       overflow: hidden;
       color: rgba(255, 255, 255, 0.12);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 32px;
       font-weight: 500;
       line-height: normal;
@@ -3902,6 +3907,12 @@
       .work-cover { width: min(62vw, 700px); }
       .work-card { flex-basis: min(62vw, 700px); }
       .work-cover { height: auto; aspect-ratio: 7 / 5; }
+      .works-marquee {
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .works-marquee.is-dragging { cursor: grabbing; }
       .footer-meta { margin-top: 240px; }
       .hero-card-stage {
         top: 48%;
@@ -3937,6 +3948,567 @@
       .works-control:hover { background: #fff; }
     }
 
+    /* PortfolioPageFrame1 about and footer - 2026-09-06 */
+    .about {
+      padding-top: 320px;
+    }
+
+    .about-banner {
+      width: min(1080px, calc(100% - 48px));
+      aspect-ratio: 18 / 5;
+      margin: 0 auto;
+    }
+
+    .about-banner img {
+      position: static;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-identity {
+      width: min(1080px, calc(100% - 48px));
+      margin: 20px auto 0;
+    }
+
+    .about-identity h2::before {
+      content: none;
+    }
+
+    .about-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 400px;
+      max-width: calc(100% - 48px);
+      margin: 320px max(24px, calc((100% - 1080px) / 2)) 0 auto;
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .experience {
+      display: block;
+      width: min(1080px, calc(100% - 48px));
+      margin: 320px auto 0;
+    }
+
+    .experience-title,
+    .skills-title {
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 43.2px;
+    }
+
+    .experience-list {
+      width: 100%;
+      margin-top: 60px;
+      gap: 60px;
+    }
+
+    .experience-row {
+      display: flex;
+      min-height: 74px;
+      gap: 48px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .experience-copy h4,
+    .experience-copy p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 32px;
+      letter-spacing: 0;
+    }
+
+    .experience-copy h4 {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .experience-copy p {
+      color: var(--secondary);
+      font-weight: 400;
+    }
+
+    .experience-brand {
+      display: flex;
+      min-width: 150px;
+      min-height: 32px;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 2px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 24px;
+      white-space: nowrap;
+    }
+
+    .experience-brand img {
+      width: auto;
+      max-width: 150px;
+      height: auto;
+      max-height: 30px;
+      object-fit: contain;
+    }
+
+    .experience-brand--poizon img {
+      width: 60px;
+      height: 23px;
+    }
+
+    .experience-brand--bytedance img {
+      width: 110px;
+      height: 30px;
+    }
+
+    .experience-brand--museum {
+      gap: 11px;
+    }
+
+    .experience-brand--museum img:first-child {
+      width: 55px;
+      height: 21px;
+    }
+
+    .experience-brand--museum img:last-child {
+      width: 91px;
+      height: 10px;
+    }
+
+    .skills {
+      width: min(1080px, calc(100% - 48px));
+      margin: 320px auto 0;
+    }
+
+    .skills-list {
+      width: 374px;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 44px;
+    }
+
+    .works {
+      margin-top: 320px;
+    }
+
+    .works-inner {
+      width: min(1080px, calc(100% - 48px));
+      max-width: 1080px;
+    }
+
+    .works-intro {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      margin: 0 0 80px;
+      gap: 48px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .works-heading-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .works-intro h2,
+    .works-intro p {
+      font-family: "Geist", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 44px;
+      letter-spacing: 0;
+    }
+
+    .works-intro p {
+      width: auto;
+      max-width: none;
+      color: var(--muted);
+      text-transform: capitalize;
+    }
+
+    .works-controls {
+      display: flex;
+      width: auto;
+      height: 48px;
+      margin: 0;
+      gap: 16px;
+      align-items: center;
+      flex: none;
+    }
+
+    .works-control {
+      width: 48px;
+      height: 48px;
+      padding: 12px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--subtle);
+      transition: background-color 260ms var(--ease), transform 260ms var(--ease);
+    }
+
+    .works-control img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .works-control:hover { background: #f2f2f2; }
+
+    .works-track {
+      margin-left: max(24px, calc((100vw - 1080px) / 2));
+    }
+
+    .works-set {
+      gap: 16px;
+      padding-right: 16px;
+    }
+
+    .work-card {
+      flex-basis: 700px;
+      width: 700px;
+      gap: 16px;
+    }
+
+    .work-index {
+      color: var(--ink);
+      font-family: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    .work-cover {
+      width: 700px;
+      height: 500px;
+      aspect-ratio: 7 / 5;
+    }
+
+    .work-copy h3,
+    .work-copy p {
+      font-family: "Geist Mono", "SFMono-Regular", Consolas, "PingFang SC", monospace;
+      font-size: 16px;
+      line-height: normal;
+      letter-spacing: 0;
+    }
+
+    .work-copy h3 {
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .work-copy p {
+      color: var(--secondary);
+      font-weight: 400;
+      text-transform: none;
+    }
+
+    .site-footer {
+      margin-top: 320px;
+    }
+
+    .footer-contact {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+      gap: 80px;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    .footer-contact-copy {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      gap: 48px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .footer-contact-copy p:first-child {
+      width: 400px;
+      color: var(--ink);
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 43.2px;
+      text-transform: capitalize;
+    }
+
+    .footer-contact-copy p:last-child {
+      width: 400px;
+      max-width: none;
+      color: var(--secondary);
+      font-size: 24px;
+      line-height: 28.8px;
+    }
+
+    .footer-contact-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+
+    .footer-contact-button {
+      width: 100%;
+      height: 44px;
+      border-radius: 12px;
+      color: var(--secondary);
+      background: var(--subtle);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+
+    .footer-contact-label {
+      cursor: default;
+    }
+
+    .footer-meta {
+      display: block;
+      width: 100%;
+      margin: 320px auto 0;
+      padding-bottom: 0;
+      color: var(--ink);
+      font-family: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 21px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .footer-meta-row {
+      display: flex;
+      width: min(1280px, calc(100% - 48px));
+      margin: 0 auto;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .footer-meta-group {
+      display: flex;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .footer-word {
+      display: flex;
+      width: min(1300px, calc(100% - 32px));
+      height: 192px;
+      margin: 32px auto 0;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: var(--ink);
+      font-family: "Geist", "PingFang SC", Arial, sans-serif;
+      font-size: 260px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1399px) and (min-width: 1201px) {
+      .footer-word {
+        height: 164px;
+        font-size: 220px;
+      }
+    }
+
+    @media (max-width: 1200px) and (min-width: 641px) {
+      .about,
+      .works,
+      .site-footer,
+      .footer-meta {
+        margin-top: 0;
+      }
+
+      .about { padding-top: 240px; }
+      .about-copy,
+      .experience,
+      .skills,
+      .works,
+      .site-footer,
+      .footer-meta { margin-top: 240px; }
+      .footer-word { height: 132px; font-size: 176px; }
+    }
+
+    @media (max-width: 640px) {
+      .about { padding-top: 240px; }
+
+      .about-banner,
+      .about-identity,
+      .about-copy,
+      .experience,
+      .skills,
+      .footer-contact,
+      .footer-meta-row {
+        width: calc(100% - (var(--mobile-info-gutter) * 2));
+        max-width: none;
+      }
+
+      .about-banner { aspect-ratio: 18 / 5; }
+      .about-identity { margin-top: 12px; }
+
+      .about-copy {
+        margin: 160px auto 0;
+        font-size: var(--type-description);
+        line-height: var(--line-description);
+      }
+
+      .experience,
+      .skills,
+      .works,
+      .site-footer,
+      .footer-meta {
+        margin-top: 160px;
+      }
+
+      .experience-title,
+      .skills-title,
+      .skills-list,
+      .footer-contact-copy p:first-child {
+        font-size: var(--type-title);
+        line-height: var(--line-title);
+      }
+
+      .experience-list {
+        margin-top: 48px;
+        gap: 40px;
+      }
+
+      .experience-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        min-height: 0;
+        gap: 16px;
+      }
+
+      .experience-copy h4,
+      .experience-copy p {
+        font-size: var(--type-description);
+        line-height: var(--line-description);
+      }
+
+      .experience-copy p { margin-top: 4px; }
+
+      .experience-brand {
+        min-width: 0;
+        max-width: 78px;
+        min-height: 24px;
+        padding-top: 0;
+        font-size: var(--type-label);
+        line-height: var(--line-label);
+      }
+
+      .experience-brand img { max-width: 78px; max-height: 22px; }
+      .experience-brand--poizon img { width: 54px; height: auto; }
+      .experience-brand--bytedance img { width: 78px; height: auto; }
+      .experience-brand--museum { gap: 4px; }
+      .experience-brand--museum img:first-child { width: 30px; height: auto; }
+      .experience-brand--museum img:last-child { width: 44px; height: auto; }
+
+      .skills-list { width: 184px; }
+
+      .works-inner {
+        width: calc(100% - (var(--mobile-info-gutter) * 2));
+      }
+
+      .works-intro {
+        flex-direction: column;
+        gap: 32px;
+        align-items: flex-start;
+      }
+
+      .works-intro h2,
+      .works-intro p {
+        font-size: var(--type-title);
+        line-height: var(--line-title);
+      }
+
+      .works-controls {
+        align-self: flex-end;
+      }
+
+      .works-track {
+        margin-left: var(--mobile-info-gutter);
+      }
+
+      .work-card,
+      .work-cover {
+        width: min(62vw, 700px);
+      }
+
+      .work-card {
+        flex-basis: min(62vw, 700px);
+      }
+
+      .work-cover {
+        height: auto;
+        aspect-ratio: 7 / 5;
+      }
+
+      .work-index,
+      .work-copy p {
+        font-size: var(--type-label);
+        line-height: var(--line-label);
+      }
+
+      .work-copy h3 {
+        font-size: var(--type-description);
+        line-height: var(--line-description);
+      }
+
+      .works-control:hover { background: var(--subtle); }
+
+      .footer-contact { gap: 64px; }
+      .footer-contact-copy {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-contact-copy p:first-child,
+      .footer-contact-copy p:last-child {
+        width: 100%;
+        max-width: none;
+      }
+
+      .footer-contact-copy p:last-child {
+        font-size: var(--type-description);
+        line-height: var(--line-description);
+      }
+
+      .footer-contact-actions { gap: 12px; }
+      .footer-contact-button { min-width: 0; font-size: var(--type-label); }
+
+      .footer-meta-row {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .footer-meta-group {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+      }
+
+      .footer-word {
+        width: calc(100% - 24px);
+        height: 56px;
+        margin-top: 32px;
+        font-size: 64px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .footer-word { font-size: 56px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after {
@@ -3959,11 +4531,200 @@
     }
   </style>
 </head>
-<body class="is-loading">
+<body class="is-loading has-story-site">
   <script>
     window.setTimeout(() => document.body.classList.remove('is-loading'), 3200);
   </script>
   <a class="skip-link" href="#home">Skip to content</a>
+
+  <div class="story-site" data-story-site>
+    <header class="story-topbar" aria-label="网站导航">
+      <a class="story-brand" href="#story-home" data-story-link="home">WENMING™</a>
+      <p class="story-bio">WENMING WU<br>SEVEN YEARS<br>OF IDEAS</p>
+      <nav class="story-nav" aria-label="主要导航">
+        <button class="is-active" type="button" data-story-nav="home">Home</button>
+        <button type="button" data-story-nav="preview">Preview</button>
+        <button type="button" data-story-nav="about">About</button>
+        <button type="button" data-story-nav="works">Works</button>
+      </nav>
+      <a class="story-contact" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=wuwenming55@gmail.com" target="_blank" rel="noopener">Contact</a>
+    </header>
+
+    <section class="story-module story-home" id="story-home" data-story-section="home">
+      <div class="story-sticky story-home-scene">
+        <div class="hero story-home-hero" data-story-hero aria-label="吴文明作品集介绍">
+          <h1 class="sr-only">Wu Wenming Design Portfolio</h1>
+          <div class="hero-frame7-background" data-hero-frame7-background aria-hidden="true"></div>
+          <div class="hero-frame7-watermarks" data-hero-frame7-watermarks aria-hidden="true"></div>
+          <div class="hero-card-backdrop hero-card-backdrop--back" data-hero-card-backdrop="back" aria-hidden="true"></div>
+          <div class="hero-card-backdrop hero-card-backdrop--main" data-hero-card-backdrop="main" aria-hidden="true"></div>
+          <div class="hero-card-stage" data-hero-card-stage aria-label="Wu Wenming portfolio introduction">
+            <div class="hero-gradient-card hero-tilt-card" data-hero-gradient-card aria-hidden="true">
+              <span class="hero-gradient-layer is-active" data-hero-gradient-layer></span>
+              <span class="hero-gradient-layer" data-hero-gradient-layer></span>
+            </div>
+            <div class="hero-profile-stack hero-tilt-card" data-hero-profile-stack>
+              <div class="hero-profile-glass-layer" data-hero-profile-glass aria-hidden="true">
+                <div class="hero-profile-glass-gradient" data-hero-profile-glass-gradient>
+                  <span class="hero-gradient-layer is-active"></span>
+                  <span class="hero-gradient-layer"></span>
+                </div>
+              </div>
+              <article class="hero-profile-card" data-hero-profile-card>
+                <img class="hero-paperclip" src="assets/portfolio-v7/paperclip-hd-384.webp" alt="" decoding="async" draggable="false">
+                <div class="hero-card-meta" aria-hidden="true">
+                  <span>2026</span><span>Portfolio</span><span>WenMing Wu</span>
+                </div>
+                <div class="hero-card-copy">
+                  <p>WENMING™</p>
+                  <h2>Designing experiences<br>for what’s next.Exploring<br>the intersection of AI,<br>interaction &amp; visual<br>systems.</h2>
+                </div>
+                <div class="hero-card-portrait">
+                  <img class="hero-card-portrait-default" src="assets/portfolio-v7/hero-card-image-1600.webp" alt="吴文明侧身肖像" decoding="async" fetchpriority="high" draggable="false">
+                  <img class="hero-card-portrait-frame7" src="assets/portfolio-frame7/hero-card-frame7-1400.webp" alt="" decoding="async" loading="lazy" draggable="false">
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-logo-rail" aria-label="合作公司与产品">
+          <div class="story-logo-track">
+            <div class="story-logo-set">
+              <img src="assets/portfolio-scroll/logo-capcut.svg" alt="CapCut">
+              <img src="assets/portfolio-scroll/logo-bytedance.svg" alt="ByteDance">
+              <img src="assets/portfolio-scroll/logo-feishu.svg" alt="飞书">
+              <img src="assets/portfolio-scroll/logo-dreamina.svg" alt="即梦 AI">
+              <img src="assets/portfolio-scroll/logo-poizon.svg" alt="得物">
+            </div>
+            <div class="story-logo-set" aria-hidden="true">
+              <img src="assets/portfolio-scroll/logo-capcut.svg" alt="">
+              <img src="assets/portfolio-scroll/logo-bytedance.svg" alt="">
+              <img src="assets/portfolio-scroll/logo-feishu.svg" alt="">
+              <img src="assets/portfolio-scroll/logo-dreamina.svg" alt="">
+              <img src="assets/portfolio-scroll/logo-poizon.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-module story-preview" id="story-preview" data-story-section="preview" data-lazy-module>
+      <div class="story-sticky story-preview-scene">
+        <div class="preview-heading">
+          <h2 class="story-chapter-title" data-split-title>Preview</h2>
+          <div class="story-chapter-meta">
+            <span>©2026, WENMING™.</span>
+            <span class="story-meta-group"><span>Shanghai, China</span><span>AI / Interaction / Visual System</span></span>
+          </div>
+        </div>
+
+        <div class="preview-stack" data-preview-stack aria-label="作品预览图集">
+          <figure class="preview-card" style="--card-width:800;--card-height:799;--target-y:0"><img data-src="assets/portfolio-scroll/preview-01.png?rev=2" width="2400" height="2397" alt="作品预览 1" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:801;--target-y:811"><img data-src="assets/portfolio-scroll/preview-02.png?rev=2" width="2400" height="2403" alt="作品预览 2" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:752;--target-y:1624"><img data-src="assets/portfolio-scroll/preview-03.png?rev=2" width="2400" height="2256" alt="作品预览 3" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:520;--target-y:2388"><img data-src="assets/portfolio-scroll/preview-04.png?rev=2" width="2400" height="1560" alt="作品预览 4" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:487;--target-y:2920"><img data-src="assets/portfolio-scroll/preview-05.png?rev=2" width="2400" height="1461" alt="作品预览 5" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:546;--target-y:3419"><img data-src="assets/portfolio-scroll/preview-06.png?rev=2" width="2400" height="1638" alt="作品预览 6" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:1198;--target-y:3977"><img data-src="assets/portfolio-scroll/preview-07.png?rev=2" width="2400" height="3594" alt="作品预览 7" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:652;--target-y:5187"><img data-src="assets/portfolio-scroll/preview-08.png?rev=2" width="2400" height="1956" alt="作品预览 8" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:604;--target-y:5851"><img data-src="assets/portfolio-scroll/preview-09.png?rev=2" width="2400" height="1812" alt="作品预览 9" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:744;--target-y:6467"><img data-src="assets/portfolio-scroll/preview-10.png?rev=2" width="2400" height="2232" alt="作品预览 10" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:518;--target-y:7223"><img data-src="assets/portfolio-scroll/preview-11.png?rev=2" width="2400" height="1554" alt="作品预览 11" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:496;--target-y:7753"><img data-src="assets/portfolio-scroll/preview-12.png?rev=2" width="2400" height="1488" alt="作品预览 12" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:702;--target-y:8261"><img data-src="assets/portfolio-scroll/preview-13.png?rev=2" width="2400" height="2106" alt="作品预览 13" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:472;--target-y:8975"><img data-src="assets/portfolio-scroll/preview-14.png?rev=2" width="2400" height="1416" alt="作品预览 14" decoding="async"></figure>
+          <figure class="preview-card" style="--card-width:800;--card-height:791;--target-y:9459"><img data-src="assets/portfolio-scroll/preview-15.png?rev=3" width="2400" height="2373" alt="作品预览 15" decoding="async"></figure>
+        </div>
+
+        <div class="story-scroll-tip preview-end-tip" data-scroll-tip>
+          <span>Scroll to explore</span><span class="story-scroll-tip-icon" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-module story-about" id="story-about" data-story-section="about" data-lazy-module>
+      <div class="story-about-intro">
+      <div class="story-sticky story-about-scene">
+      <div class="story-about-hero">
+        <div class="story-about-mask"><img data-src="assets/portfolio-scroll/about-hero-source.png" width="1672" height="941" alt="吴文明动态肖像横幅" decoding="async"></div>
+        <div class="story-about-identity"><p>Wenming Wu</p><p>Product Experience Designer</p></div>
+      </div>
+
+      <div class="about-heading">
+        <h2 class="story-chapter-title about-big-title" data-split-title>About</h2>
+        <div class="story-scroll-tip about-intro-tip"><span>Scroll to explore</span><span class="story-scroll-tip-icon" aria-hidden="true"></span></div>
+      </div>
+      </div>
+      </div>
+
+      <div class="story-chapter-meta about-persistent-meta">
+        <span>©2026, WENMING™.</span>
+        <span class="story-meta-group"><span>Shanghai, China</span><span>AI / Interaction / Visual System</span></span>
+      </div>
+
+      <div class="story-about-body">
+        <div class="story-about-profile">
+          <div class="story-about-portrait"><img data-src="assets/portfolio-scroll/about-portrait-source.png" width="1448" height="1086" alt="吴文明肖像" decoding="async"></div>
+          <div class="story-about-copy">
+            <p>Wenming Wu is a Product Experience Designer with seven years of experience across <strong>productivity tools, ecommerce, social platforms,</strong> and <strong>global products.</strong></p>
+            <p>He specializes in 0-to-1 product design, using innovative visual and interaction solutions to balance <strong>business goals</strong> and <strong>user needs.</strong></p>
+          </div>
+        </div>
+
+        <section class="story-experience" aria-labelledby="story-experience-title">
+          <h3 class="story-subheading" id="story-experience-title">Experiences</h3>
+          <div class="story-experience-list">
+            <article class="story-experience-row"><div><h4>得物 Poizon</h4><p>2026 – Present, Poizon, Product Experience Designer</p></div><div class="story-experience-logo"><img data-src="assets/portfolio-v6/about-poizon.svg" alt="POIZON"></div></article>
+            <article class="story-experience-row"><div><h4>字节跳动</h4><p>2022 - 2025, ByteDance, Product Experience Designer</p></div><div class="story-experience-logo"><img data-src="assets/portfolio-v6/about-bytedance.png" alt="ByteDance"></div></article>
+            <article class="story-experience-row"><div><h4>Camera 360</h4><p>2019 - 2022, ChengDu PinGuo, Product Experience Designer</p></div><div class="story-experience-logo">Camera 360</div></article>
+            <article class="story-experience-row"><div><h4>成都博物馆</h4><p>2018, ChengDu Museum, Visual Designer</p></div><div class="story-experience-logo story-museum-logo" aria-label="ChengDu Museum"><img data-src="assets/portfolio-v6/about-museum-mark.svg" alt=""><img data-src="assets/portfolio-v6/about-museum-name.svg" alt=""></div></article>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="story-about-end">
+        <div class="story-sticky story-about-end-scene">
+          <section class="story-skills" aria-labelledby="story-skills-title">
+            <h3 class="story-subheading" id="story-skills-title">Skills</h3>
+            <p class="story-skills-list">UX Engineering<br>UI Design<br>Motion Design<br>AI Interaction<br>Design Systems<br>Creative Development</p>
+          </section>
+          <div class="story-scroll-tip about-end-tip" data-scroll-tip>
+            <span>Scroll to explore</span><span class="story-scroll-tip-icon" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-module story-works" id="story-works" data-story-section="works" data-lazy-module>
+      <header class="story-works-heading">
+        <h2 class="story-chapter-title" data-split-title>Works</h2>
+        <div class="story-chapter-meta">
+          <span>©2026, WENMING™.</span>
+          <span class="story-meta-group"><span>Products, Systems, And Experiences</span><span>2019–2026</span></span>
+        </div>
+      </header>
+
+      <div class="story-work-grid">
+        <button class="story-work-card" type="button" data-story-project="blurrr" style="--card-index:0"><span class="story-work-index">01.</span><span class="story-work-image"><img data-src="assets/portfolio-v6/work-blurrr.png" width="700" height="500" alt="Blurrr 项目封面"></span><span class="story-work-copy"><span>Blurrr</span><span>2021 · Experience · Lead Designer</span></span></button>
+        <button class="story-work-card" type="button" data-story-project="capcut-design-language" style="--card-index:1"><span class="story-work-index">02.</span><span class="story-work-image"><img data-src="assets/portfolio-v6/work-capcut.png" width="700" height="500" alt="剪映设计语言项目封面"></span><span class="story-work-copy"><span>剪映设计语言 Design Language</span><span>2024 · Guideline · Design Contributor</span></span></button>
+        <button class="story-work-card" type="button" data-story-project="dreamina" style="--card-index:2"><span class="story-work-index">03.</span><span class="story-work-image"><img data-src="assets/portfolio-v6/work-dreamina.png" width="700" height="500" alt="即梦项目封面"></span><span class="story-work-copy"><span>即梦 Dreamina</span><span>2024 · Experience · Lead Designer</span></span></button>
+        <button class="story-work-card" type="button" data-story-project="salad-video" style="--card-index:3"><span class="story-work-index">04.</span><span class="story-work-image"><img data-src="assets/portfolio-v6/work-base.png" width="700" height="500" alt="Salad Video 项目封面"></span><span class="story-work-copy"><span>Salad Video</span><span>2020 · Experience · Lead Designer</span></span></button>
+        <button class="story-work-card" type="button" data-story-project="capcut-lite" style="--card-index:4"><span class="story-work-index">05.</span><span class="story-work-image"><img data-src="assets/portfolio-v6/work-capcut-lite.png" width="700" height="500" alt="剪映模版编辑器项目封面"></span><span class="story-work-copy"><span>剪映模版编辑器 CapCut Lite Editor</span><span>2023 · Experience · Lead Designer</span></span></button>
+      </div>
+
+      <div class="story-contact-block" id="story-contact">
+        <div class="story-contact-copy"><p>Open For<br>Select Collaborations</p><p>Thank you for exploring my work.<br>Have a project in mind? Let’s create something meaningful together.</p></div>
+        <div class="story-contact-actions"><button type="button" data-wechat-copy="18202888332" aria-label="Copy WeChat ID">WeChat</button><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=wuwenming55@gmail.com" target="_blank" rel="noopener">Email</a></div>
+      </div>
+
+      <footer class="story-footer">
+        <div class="story-footer-meta"><span>©2026, WENMING™.</span><span class="story-meta-group"><span>Shanghai, China</span><span>AI / Interaction / Visual System</span></span></div>
+        <p class="story-chapter-title story-footer-word" data-split-title>Wenming</p>
+      </footer>
+    </section>
+  </div>
 
   <header class="topbar is-light" aria-label="Current page and profile" data-profile-popover data-theme="light">
     <div class="topbar-panel">
@@ -3986,7 +4747,7 @@
           <span>©2026</span>
         </div>
         <div class="profile-actions">
-          <a class="profile-action" href="mailto:247736038@qq.com">Say Hello！</a>
+          <a class="profile-action" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=wuwenming55@gmail.com" target="_blank" rel="noopener">Say Hello！</a>
         </div>
       </section>
     </div>
@@ -4104,8 +4865,7 @@
         <div class="about-grid">
           <div class="about-profile">
             <div class="about-banner reveal" aria-hidden="true">
-              <img src="assets/portfolio-v6/about-banner-base.png" alt="" decoding="async" loading="lazy">
-              <img src="assets/portfolio-v6/about-banner-overlay.png" alt="" decoding="async" loading="lazy">
+              <img src="assets/portfolio-v6/about-banner-figma.png" alt="" decoding="async" loading="lazy">
             </div>
 
             <header class="about-identity reveal">
@@ -4113,9 +4873,10 @@
               <p>Product Experience Designer</p>
             </header>
 
-            <p class="about-copy reveal">
-              Wenming Wu is a product experience designer with seven years of experience <strong>across productivity tools, e-commerce, social platforms, and global products.</strong> He specializes in 0-to-1 product design, using innovative visual and interaction solutions to <strong>balance business goals and user needs.</strong>
-            </p>
+            <div class="about-copy reveal">
+              <p>Wenming Wu is a Product Experience Designer with seven years of experience <strong>across productivity tools, ecommerce, social platforms, and global products.</strong></p>
+              <p>He specializes in 0-to-1 product design, using innovative visual and interaction solutions to <strong>balance business goals and user needs.</strong></p>
+            </div>
           </div>
 
           <section class="experience" aria-labelledby="experience-title">
@@ -4123,46 +4884,37 @@
 
             <div class="experience-list">
               <article class="experience-row reveal">
-                <p class="experience-date">2026 - now</p>
-                <div class="experience-detail">
-                  <div>
-                    <div class="company-line"><span>得物</span><span class="divider"></span><span>Exprience designer</span></div>
-                    <p class="company-period">Poizon Technology Co. Ltd</p>
-                  </div>
-                  <div class="company-logo company-logo--poizon"><img src="assets/portfolio-v4/info-poizon.svg" alt="POIZON" loading="lazy"></div>
+                <div class="experience-copy">
+                  <h4>得物 Poizon</h4>
+                  <p>2026 – Present, Poizon, Product Experience Designer</p>
                 </div>
+                <div class="experience-brand experience-brand--poizon"><img src="assets/portfolio-v6/about-poizon.svg" alt="POIZON" loading="lazy"></div>
               </article>
 
               <article class="experience-row reveal">
-                <p class="experience-date">2022 - 2025</p>
-                <div class="experience-detail">
-                  <div>
-                    <div class="company-line"><span>字节跳动</span><span class="divider"></span><span>Exprience designer</span></div>
-                    <p class="company-period">ByteDance Technology Co. Ltd</p>
-                  </div>
-                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="ByteDance" decoding="async" loading="lazy"></div>
+                <div class="experience-copy">
+                  <h4>字节跳动</h4>
+                  <p>2022 - 2025, ByteDance, Product Experience Designer</p>
                 </div>
+                <div class="experience-brand experience-brand--bytedance"><img src="assets/portfolio-v6/about-bytedance.png" alt="ByteDance" decoding="async" loading="lazy"></div>
               </article>
 
               <article class="experience-row reveal">
-                <p class="experience-date">2019 - 2022</p>
-                <div class="experience-detail">
-                  <div>
-                    <div class="company-line"><span>Camera 360</span><span class="divider"></span><span>Exprience designer</span></div>
-                    <p class="company-period">ChengDu PinGuo Technology Co. Ltd</p>
-                  </div>
-                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="Camera 360" decoding="async" loading="lazy"></div>
+                <div class="experience-copy">
+                  <h4>Camera 360</h4>
+                  <p>2019 - 2022, ChengDu PinGuo, Product Experience Designer</p>
                 </div>
+                <div class="experience-brand">Camera 360</div>
               </article>
 
               <article class="experience-row reveal">
-                <p class="experience-date">2018 - 2019</p>
-                <div class="experience-detail">
-                  <div>
-                    <div class="company-line"><span>成都博物馆</span><span class="divider"></span><span>vision designer</span></div>
-                    <p class="company-period">ChengDu Museum</p>
-                  </div>
-                  <div class="company-logo"><img src="assets/portfolio-v4/info-bytedance.png" alt="ChengDu Museum" decoding="async" loading="lazy"></div>
+                <div class="experience-copy">
+                  <h4>成都博物馆</h4>
+                  <p>2018, ChengDu Museum, Visual Designer</p>
+                </div>
+                <div class="experience-brand experience-brand--museum" aria-label="ChengDu Museum">
+                  <img src="assets/portfolio-v6/about-museum-mark.svg" alt="" loading="lazy">
+                  <img src="assets/portfolio-v6/about-museum-name.svg" alt="" loading="lazy">
                 </div>
               </article>
             </div>
@@ -4179,82 +4931,94 @@
     <section class="works" id="works" data-topbar-theme="light" aria-labelledby="works-title">
       <div class="works-inner">
         <header class="works-intro">
-          <h2 id="works-title">Selected Works</h2>
-          <p>Products, systems, and experiences designed with purpose.</p>
+          <div class="works-heading-copy">
+            <h2 id="works-title">Selected Works</h2>
+            <p>Products, Systems, And Experiences</p>
+          </div>
+          <div class="works-controls" aria-label="Selected works controls">
+            <button class="works-control" type="button" data-works-previous aria-label="Previous projects">
+              <img src="assets/portfolio-v6/arrow-left.svg" alt="">
+            </button>
+            <button class="works-control" type="button" data-works-next aria-label="Next projects">
+              <img src="assets/portfolio-v6/arrow-right.svg" alt="">
+            </button>
+          </div>
         </header>
       </div>
 
       <div class="works-marquee" data-works-marquee aria-label="Selected works">
         <div class="works-track" data-works-track>
           <div class="works-set" data-works-set>
-              <article class="work-card" data-project="capcut-design-language" data-project-year="2023年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-capcut.png" alt="CapCut design language project cover" decoding="async" loading="lazy"></div>
+              <article class="work-card" data-project="blurrr" data-project-year="2019年">
+                <p class="work-index">01.</p>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-blurrr.png" alt="Blurrr video editing app project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
-                  <h3>剪映设计语言 Design Language</h3>
-                  <p>Elevating Design Expression for CapCut’s Next Chapter</p>
+                  <h3>Blurrr</h3>
+                  <p>2021 · Experience · Lead Designer</p>
                 </div>
               </article>
 
-              <article class="work-card" data-project="salad-video" data-project-year="2018 - 2022">
-                <div class="work-cover"><img src="assets/portfolio-v6/work-base.png" alt="Salad Video aesthetic editor project cover" decoding="async" loading="lazy"></div>
+              <article class="work-card" data-project="capcut-design-language" data-project-year="2023年">
+                <p class="work-index">02.</p>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-capcut.png" alt="CapCut design language project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
-                  <h3>Salad Video</h3>
-                  <p>Video Templates &amp; Aesthetic Effects Editor</p>
+                  <h3>剪映设计语言 Design Language</h3>
+                  <p>2024 · Guideline · Design Contributor</p>
                 </div>
               </article>
 
               <article class="work-card" data-project="dreamina" data-project-year="2024年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-dreamina.png" alt="Dreamina AI image and video creation tool project cover" decoding="async" loading="lazy"></div>
+                <p class="work-index">03.</p>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-dreamina.png" alt="Dreamina AI image and video creation tool project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>即梦 Dreamina</h3>
-                  <p>Exploring the Future of AI Image &amp; Video Creation Tools</p>
+                  <p>2024 · Experience · Lead Designer</p>
+                </div>
+              </article>
+
+              <article class="work-card" data-project="salad-video" data-project-year="2018 - 2022">
+                <p class="work-index">04.</p>
+                <div class="work-cover"><img src="assets/portfolio-v6/work-base.png" alt="Salad Video aesthetic editor project cover" decoding="async" loading="lazy"></div>
+                <div class="work-copy">
+                  <h3>Salad Video</h3>
+                  <p>2020 · Experience · Lead Designer</p>
                 </div>
               </article>
 
               <article class="work-card" data-project="capcut-lite" data-project-year="2023年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-capcut-lite.png" alt="CapCut Lite editor project cover" decoding="async" loading="lazy"></div>
+                <p class="work-index">05.</p>
+                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-capcut-lite.png" alt="CapCut Lite editor project cover" decoding="async" loading="lazy"></div>
                 <div class="work-copy">
                   <h3>剪映模版编辑器 CapCut Lite Editor</h3>
-                  <p>A complete redesign of the visual language and editing experience.</p>
-                </div>
-              </article>
-
-              <article class="work-card" data-project="blurrr" data-project-year="2019年">
-                <div class="work-cover work-cover-layered"><img src="assets/portfolio-v6/work-base.png" alt="" decoding="async" loading="lazy"><img src="assets/portfolio-v6/work-blurrr.png" alt="Blurrr video editing app project cover" decoding="async" loading="lazy"></div>
-                <div class="work-copy">
-                  <h3>Blurrr</h3>
-                  <p>Video Editing for Anime, Film, Gaming &amp; Idol Communities</p>
+                  <p>2023 · Experience · Lead Designer</p>
                 </div>
               </article>
           </div>
         </div>
-      </div>
-      <div class="works-controls" aria-label="Selected works controls">
-        <button class="works-control" type="button" data-works-previous aria-label="Previous projects">
-          <img src="assets/portfolio-v6/arrow-left.svg" alt="">
-        </button>
-        <button class="works-control" type="button" data-works-next aria-label="Next projects">
-          <img src="assets/portfolio-v6/arrow-right.svg" alt="">
-        </button>
       </div>
     </section>
 
     <footer class="site-footer">
       <div class="footer-contact">
         <div class="footer-contact-copy">
-          <p>WENMING™</p>
+          <p>Open For<br>Select Collaborations</p>
           <p>Thank you for exploring my work.<br>Have a project in mind? Let’s create something meaningful together.</p>
         </div>
-        <a class="footer-contact-button" href="mailto:247736038@qq.com">Say hello</a>
+        <div class="footer-contact-actions">
+          <span class="footer-contact-button footer-contact-label">WeChat</span>
+          <a class="footer-contact-button" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=wuwenming55@gmail.com" target="_blank" rel="noopener">Email</a>
+        </div>
       </div>
 
       <div class="footer-meta">
-        <div>
-          <span>WENMING™</span>
-          <span>AI / INTERACTION / VISUAL</span>
-          <span>Shanghai, China</span>
+        <div class="footer-meta-row">
+          <span>©2026, WENMING™.</span>
+          <div class="footer-meta-group">
+            <span>Shanghai, China</span>
+            <span>AI / Interaction / Visual System</span>
+          </div>
         </div>
-        <span>©2026</span>
+        <p class="footer-word">WENMING</p>
       </div>
     </footer>
   </main>
@@ -4291,21 +5055,21 @@
         })
       : null;
     const revealElements = [...document.querySelectorAll('.reveal')];
-    const hero = document.getElementById('home');
-    const heroCardStage = document.querySelector('[data-hero-card-stage]');
-    const heroProfileStack = document.querySelector('[data-hero-profile-stack]');
-    const heroProfileCard = document.querySelector('[data-hero-profile-card]');
-    const heroProfileGlass = document.querySelector('[data-hero-profile-glass]');
-    const heroProfileGlassGradient = document.querySelector('[data-hero-profile-glass-gradient]');
-    const heroGradientCard = document.querySelector('[data-hero-gradient-card]');
-    const heroGradientLayers = [...document.querySelectorAll('[data-hero-gradient-layer]')];
+    const hero = document.querySelector('[data-story-hero]') || document.getElementById('home');
+    const heroCardStage = hero?.querySelector('[data-hero-card-stage]');
+    const heroProfileStack = hero?.querySelector('[data-hero-profile-stack]');
+    const heroProfileCard = hero?.querySelector('[data-hero-profile-card]');
+    const heroProfileGlass = hero?.querySelector('[data-hero-profile-glass]');
+    const heroProfileGlassGradient = hero?.querySelector('[data-hero-profile-glass-gradient]');
+    const heroGradientCard = hero?.querySelector('[data-hero-gradient-card]');
+    const heroGradientLayers = hero ? [...hero.querySelectorAll('[data-hero-gradient-layer]')] : [];
     const heroProfileGlassLayers = heroProfileGlassGradient
       ? [...heroProfileGlassGradient.querySelectorAll('.hero-gradient-layer')]
       : [];
-    const heroFrame7Background = document.querySelector('[data-hero-frame7-background]');
-    const heroFrame7Watermarks = document.querySelector('[data-hero-frame7-watermarks]');
-    const heroMainBackdrop = document.querySelector('[data-hero-card-backdrop="main"]');
-    const heroBackBackdrop = document.querySelector('[data-hero-card-backdrop="back"]');
+    const heroFrame7Background = hero?.querySelector('[data-hero-frame7-background]');
+    const heroFrame7Watermarks = hero?.querySelector('[data-hero-frame7-watermarks]');
+    const heroMainBackdrop = hero?.querySelector('[data-hero-card-backdrop="main"]');
+    const heroBackBackdrop = hero?.querySelector('[data-hero-card-backdrop="back"]');
     const worksSet = document.querySelector('[data-works-track]');
     const worksMarquee = document.querySelector('[data-works-marquee]');
     const worksPrevious = document.querySelector('[data-works-previous]');
@@ -5024,17 +5788,17 @@
       });
     };
 
-    playHomeIntro();
+    if (!document.querySelector('[data-story-site]')) playHomeIntro();
 
     window.addEventListener('load', () => {
-      stabilizeInitialScroll();
+      if (!document.querySelector('[data-story-site]')) stabilizeInitialScroll();
       if (lenis) lenis.resize();
     }, { once: true });
 
     window.addEventListener('pageshow', (event) => {
-      stabilizeInitialScroll();
+      if (!document.querySelector('[data-story-site]')) stabilizeInitialScroll();
       refreshHeroPaint();
-      if (event.persisted) {
+      if (event.persisted && !document.querySelector('[data-story-site]')) {
         homeIntroStarted = false;
         playHomeIntro({ waitForAssets: false });
       }
@@ -5060,6 +5824,7 @@
       let suppressWorksClickTimer = 0;
 
       if (primaryWorksSet) {
+        const mobileWorksQuery = window.matchMedia('(max-width: 640px)');
         let worksVisible = false;
         if (worksMarquee && 'IntersectionObserver' in window) {
           new IntersectionObserver(([entry]) => {
@@ -5095,7 +5860,8 @@
           if (!firstCard) return;
           const setStyle = getComputedStyle(primaryWorksSet);
           const gap = Number.parseFloat(setStyle.columnGap || setStyle.gap) || 0;
-          const distance = (firstCard.getBoundingClientRect().width + gap) * direction;
+          const cardCount = mobileWorksQuery.matches ? 1 : 2;
+          const distance = (firstCard.getBoundingClientRect().width + gap) * cardCount * direction;
 
           if (prefersReducedMotion) {
             worksOffset += distance;
@@ -5110,23 +5876,23 @@
             distance,
             applied: 0
           };
-          currentSpeed = 0;
+          if (mobileWorksQuery.matches) currentSpeed = 0;
         };
 
         const bindWorksControl = (button, direction) => {
           button?.addEventListener('click', () => {
             nudgeWorks(direction);
-            button.blur();
+            if (mobileWorksQuery.matches) button.blur();
           });
         };
 
         bindWorksControl(worksPrevious, 1);
         bindWorksControl(worksNext, -1);
         worksMarquee?.addEventListener('pointerenter', (event) => {
-          if (event.pointerType === 'mouse') targetSpeed = hoverSpeed;
+          if (!mobileWorksQuery.matches || event.pointerType === 'mouse') targetSpeed = hoverSpeed;
         });
         worksMarquee?.addEventListener('pointerleave', (event) => {
-          if (event.pointerType === 'mouse' && !worksDrag) targetSpeed = normalSpeed;
+          if ((!mobileWorksQuery.matches || event.pointerType === 'mouse') && !worksDrag) targetSpeed = normalSpeed;
         });
 
         const endWorksDrag = (event, cancelled = false) => {
@@ -5145,6 +5911,7 @@
         };
 
         worksMarquee?.addEventListener('pointerdown', (event) => {
+          if (!mobileWorksQuery.matches) return;
           if (event.pointerType === 'mouse' && event.button !== 0) return;
           worksJump = null;
           currentSpeed = 0;
@@ -5186,7 +5953,9 @@
             const delta = Math.min((time - previousFrameTime) / 1000, 0.05);
             previousFrameTime = time;
             currentSpeed += (targetSpeed - currentSpeed) * (1 - Math.exp(-delta * 4.5));
-            if (!worksJump && !worksDrag) worksOffset -= currentSpeed * delta;
+            if (!worksDrag && (!worksJump || !mobileWorksQuery.matches)) {
+              worksOffset -= currentSpeed * delta;
+            }
 
             if (worksJump) {
               const progress = Math.min((time - worksJump.start) / worksJump.duration, 1);
@@ -5490,5 +6259,6 @@
       updateActiveNav();
     }, 500);
   </script>
+  <script src="assets/portfolio-scroll/scroll-story.js?v=20260908-0230"></script>
 </body>
 </html>
