@@ -36,10 +36,13 @@
   const footer = site.querySelector('.story-footer');
   const footerWord = site.querySelector('.story-footer-word');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobileLayoutQuery = window.matchMedia('(max-width: 900px)');
+  const coarsePointerQuery = window.matchMedia('(hover: none), (pointer: coarse)');
+  const isMobileInteraction = () => mobileLayoutQuery.matches || coarsePointerQuery.matches;
 
   const previewContentWidth = 800;
   const previewContentHeight = 10250;
-  const previewStackWidths = [480, 480, 480, 480, 480];
+  const previewStackWidths = [480, 468, 468, 468, 468];
 
   previewCards.forEach((card, index) => {
     card.style.setProperty('--card-index', index);
@@ -72,8 +75,9 @@
     module.dataset.moduleLoaded = 'true';
     module.querySelectorAll('img[data-src]').forEach((image, index) => {
       image.loading = (module === preview && index < 5) || (module === about && index === 0) || module === works ? 'eager' : 'lazy';
-      image.src = image.dataset.src;
+      image.src = (isMobileInteraction() && image.dataset.srcMobile) || image.dataset.src;
       image.removeAttribute('data-src');
+      image.removeAttribute('data-src-mobile');
     });
   };
 
@@ -125,6 +129,7 @@
   let previewIntroTimer = 0;
   let previewTiltResetTimer = 0;
   let previousPreviewScrollY = window.scrollY;
+  let previousPreviewLayout = -1;
   let previewNavigationTimer = 0;
   let previewNavPending = false;
   let aboutNavPending = false;
@@ -172,6 +177,11 @@
   let worksReturnTimer = 0;
   let worksReturning = false;
   let previousTouchY = null;
+  let storyViewportHeight = Math.max(1, window.visualViewport?.height || window.innerHeight);
+  let footerScrollStart = 0;
+  let pageScrollEnd = 0;
+  let resizeTimer = 0;
+  let lastViewportWidth = window.innerWidth;
 
   const releaseAboutScroll = () => {
     if (!aboutScrollLock) return;
@@ -249,19 +259,29 @@
   window.addEventListener('wheel', preventIntroScroll, { passive: false, capture: true });
   window.addEventListener('touchstart', (event) => { previousTouchY = event.touches[0].clientY; }, { passive: true });
   window.addEventListener('touchmove', preventIntroScroll, { passive: false, capture: true });
+  const finishTouchGesture = () => {
+    previousTouchY = null;
+    if (!aboutReturning || aboutReturnPhase !== 'gesture') return;
+    if (aboutReturnProgress >= 0.32) finishAboutReturn();
+    else cancelAboutReturn();
+  };
+  window.addEventListener('touchend', finishTouchGesture, { passive: true });
+  window.addEventListener('touchcancel', finishTouchGesture, { passive: true });
   window.addEventListener('keydown', preventIntroScroll, { capture: true });
 
   const refreshMetrics = () => {
+    storyViewportHeight = Math.max(1, window.visualViewport?.height || window.innerHeight);
+    document.documentElement.style.setProperty('--story-viewport-height', `${storyViewportHeight}px`);
     const available = Math.max(280, window.innerWidth - (window.innerWidth <= 900 ? 32 : 160));
     previewScale = Math.min(1, available / previewContentWidth);
     const scaledContentHeight = previewContentHeight * previewScale;
-    const previewHeight = scaledContentHeight + window.innerHeight * 4.5;
-    preview.style.height = `${Math.max(window.innerHeight * 5, previewHeight)}px`;
+    const previewHeight = scaledContentHeight + storyViewportHeight * 4.5;
+    preview.style.height = `${Math.max(storyViewportHeight * 5, previewHeight)}px`;
 
     previewStack.style.width = `${previewContentWidth * previewScale}px`;
     previewStack.style.height = `${scaledContentHeight}px`;
 
-    const stackCenter = Math.min(220, window.innerHeight * 0.235);
+    const stackCenter = Math.min(220, storyViewportHeight * 0.235);
     previewCards.forEach((card, index) => {
       const style = getComputedStyle(card);
       const width = Number.parseFloat(style.getPropertyValue('--card-width')) || 720;
@@ -307,6 +327,12 @@
     aboutEndStart = aboutEnd.getBoundingClientRect().top + window.scrollY;
     fitSplitTitleToWidth(footerWord, 760);
     metrics = new Map(sections.map((section) => [section, readSectionMetrics(section)]));
+    pageScrollEnd = Math.max(1, document.documentElement.scrollHeight - storyViewportHeight);
+    if (footer) {
+      const footerTop = footer.getBoundingClientRect().top + window.scrollY;
+      footerScrollStart = Math.min(pageScrollEnd - 1, footerTop - storyViewportHeight * 0.9);
+    }
+    previousPreviewLayout = -1;
     updateStory();
   };
 
@@ -323,15 +349,26 @@
   const resetPreviewIntro = () => {
     window.clearTimeout(previewIntroTimer);
     window.clearTimeout(previewTiltResetTimer);
+    previewStack.classList.remove('is-tilt-resting');
+    previewStack.style.setProperty('--preview-list-y', '0px');
     previewStack.style.setProperty('--preview-list-tilt', '0deg');
+    previousPreviewLayout = -1;
     previewIntroState = 'idle';
     preview.classList.remove('is-entered', 'is-preview-intro', 'is-preview-ready', 'is-returning-from-about');
-    previewCards.forEach((card) => card.style.removeProperty('opacity'));
+    previewCards.forEach((card, index) => {
+      const cardMetrics = previewCardMetrics[index];
+      if (cardMetrics) {
+        card.style.top = `${cardMetrics.top}px`;
+        card.style.transform = `translate3d(-50%, 0, 0) scale(${cardMetrics.scale})`;
+      }
+      card.style.removeProperty('opacity');
+    });
   };
 
   const finishPreviewIntro = () => {
     previewIntroState = 'ready';
     previewLayoutAnchor = window.scrollY;
+    previousPreviewLayout = -1;
     preview.classList.remove('is-preview-intro');
     preview.classList.add('is-preview-ready');
     requestStoryUpdate();
@@ -343,6 +380,7 @@
 
     loadModule(preview);
     window.clearTimeout(previewIntroTimer);
+    previewStack.style.setProperty('--preview-list-y', '0px');
     preview.classList.remove('is-entered', 'is-preview-intro', 'is-preview-ready', 'is-returning-from-about');
     previewCards.forEach((card) => card.style.removeProperty('opacity'));
     void preview.offsetWidth;
@@ -355,7 +393,7 @@
       return;
     }
 
-    previewIntroTimer = window.setTimeout(finishPreviewIntro, 3180);
+    previewIntroTimer = window.setTimeout(finishPreviewIntro, isMobileInteraction() ? 2200 : 3180);
   };
 
   const resetAboutIntro = () => {
@@ -408,7 +446,7 @@
         releaseAboutScroll();
         setTipVisible(aboutIntroTip, true);
         requestStoryUpdate();
-      }, reducedMotion ? 0 : 1520);
+      }, reducedMotion ? 0 : (isMobileInteraction() ? 1120 : 1520));
     }));
   };
 
@@ -439,7 +477,7 @@
       const previewMeasure = metrics.get(preview);
       const target = Math.max(
         previewMeasure?.start ?? 0,
-        (previewMeasure?.end ?? window.scrollY) - window.innerHeight * 2.9
+        (previewMeasure?.end ?? window.scrollY) - storyViewportHeight * 2.9
       );
       loadModule(preview);
       window.clearTimeout(previewIntroTimer);
@@ -485,7 +523,7 @@
 
   const updateAboutReturnGesture = (delta) => {
     if (!aboutReturning || aboutReturnPhase !== 'gesture' || !delta) return;
-    const gestureDistance = Math.max(360, window.innerHeight * 0.65);
+    const gestureDistance = Math.max(280, storyViewportHeight * 0.65);
     setAboutReturnProgress(aboutReturnProgress + delta / gestureDistance);
     if (aboutReturnProgress >= 1) finishAboutReturn();
     else if (aboutReturnProgress <= 0 && delta < 0) cancelAboutReturn();
@@ -574,9 +612,10 @@
     }
 
     // Direct navigation skips the overlapping About exit; scroll entry keeps it.
-    const headingDelay = directNavigation ? 0 : 660;
-    const cardsDelay = directNavigation ? 980 : 1640;
-    const finishDelay = directNavigation ? 2340 : 3000;
+    const mobile = isMobileInteraction();
+    const headingDelay = directNavigation ? 0 : (mobile ? 360 : 660);
+    const cardsDelay = directNavigation ? (mobile ? 620 : 980) : (mobile ? 900 : 1640);
+    const finishDelay = directNavigation ? (mobile ? 1560 : 2340) : (mobile ? 1880 : 3000);
     worksTitleTimer = window.setTimeout(() => {
       if (sequence !== worksIntroSequence) return;
       works.classList.add('is-entered');
@@ -591,6 +630,12 @@
   const updatePreviewTilt = (scrollY, active) => {
     const delta = scrollY - previousPreviewScrollY;
     previousPreviewScrollY = scrollY;
+
+    if (isMobileInteraction()) {
+      window.clearTimeout(previewTiltResetTimer);
+      previewStack.style.setProperty('--preview-list-tilt', '0deg');
+      return;
+    }
 
     if (!active || reducedMotion) {
       window.clearTimeout(previewTiltResetTimer);
@@ -611,60 +656,70 @@
   const updatePreview = (scrollY) => {
     const measure = metrics.get(preview);
     if (!measure) return;
-    const scrollRange = Math.max(1, measure.height - window.innerHeight);
-    const progress = clamp((scrollY - measure.start) / scrollRange);
-
-    if (scrollY < measure.start - window.innerHeight * 0.3 && previewIntroState === 'ready') {
+    if (scrollY < measure.start - storyViewportHeight * 0.3 && previewIntroState === 'ready') {
       resetPreviewIntro();
     } else if (
       scrollY >= measure.start &&
-      scrollY < measure.end - window.innerHeight &&
+      scrollY < measure.end - storyViewportHeight &&
       previewIntroState === 'idle' &&
       !previewNavPending
     ) {
       startPreviewIntro();
     }
 
+    if (
+      scrollY < measure.start - storyViewportHeight ||
+      (scrollY > measure.end + storyViewportHeight && !aboutReturning && navigationTarget !== 'preview')
+    ) {
+      previousPreviewScrollY = scrollY;
+      return;
+    }
+
     const localAfterIntro = previewIntroState === 'ready'
       ? Math.max(0, scrollY - previewLayoutAnchor)
       : 0;
-    const layoutDistance = window.innerHeight * 1.15;
+    const layoutDistance = storyViewportHeight * 1.15;
     const layout = reducedMotion ? 1 : smooth(range(localAfterIntro, 0, layoutDistance));
-    const listScrollStart = window.innerHeight * 1.02;
+    const listScrollStart = storyViewportHeight * 1.02;
     const listScrollEnd = Math.max(
       listScrollStart + 1,
-      measure.end - window.innerHeight * 2.9 - previewLayoutAnchor
+      measure.end - storyViewportHeight * 2.9 - previewLayoutAnchor
     );
     const listScroll = range(localAfterIntro, listScrollStart, listScrollEnd);
     const contentHeight = previewContentHeight * previewScale;
-    const viewportAllowance = window.innerHeight * (456.19 / 1024);
+    const viewportAllowance = storyViewportHeight * (456.19 / 1024);
     const stackOffset = previewStack.offsetTop;
     const travel = Math.max(0, stackOffset + contentHeight - viewportAllowance) * listScroll;
+    const mobile = isMobileInteraction();
+    previewStack.style.setProperty('--preview-list-y', mobile ? `${(-travel).toFixed(2)}px` : '0px');
 
-    previewCards.forEach((card, index) => {
-      const { target, top: stackTop, scale: stackScale } = previewCardMetrics[index];
-      const top = lerp(stackTop, target - travel, layout);
-      const scale = lerp(stackScale, 1, layout);
-      card.style.top = `${top}px`;
-      card.style.transform = `translate3d(-50%, 0, 0) scale(${scale})`;
+    if (!mobile || Math.abs(layout - previousPreviewLayout) > 0.0005) {
+      previewCards.forEach((card, index) => {
+        const { target, top: stackTop, scale: stackScale } = previewCardMetrics[index];
+        const top = lerp(stackTop, target - (mobile ? 0 : travel), layout);
+        const scale = lerp(stackScale, 1, layout);
+        card.style.top = `${top}px`;
+        card.style.transform = `translate3d(-50%, 0, 0) scale(${scale})`;
 
-      if (previewIntroState === 'ready') {
-        const revealStart = index < 5
-          ? 0
-          : ((index - 5) / Math.max(1, previewCards.length - 5)) * 0.38;
-        card.style.opacity = index < 5
-          ? '1'
-          : String(smooth(range(layout, revealStart, revealStart + 0.24)));
-      } else if (previewIntroState === 'playing') {
-        card.style.removeProperty('opacity');
-      }
-    });
+        if (previewIntroState === 'ready') {
+          const revealStart = index < 5
+            ? 0
+            : ((index - 5) / Math.max(1, previewCards.length - 5)) * 0.38;
+          card.style.opacity = index < 5
+            ? '1'
+            : String(smooth(range(layout, revealStart, revealStart + 0.24)));
+        } else if (previewIntroState === 'playing') {
+          card.style.removeProperty('opacity');
+        }
+      });
+      previousPreviewLayout = layout;
+    }
 
     const tail = localAfterIntro - listScrollEnd;
     const titleSettle = smooth(range(localAfterIntro, 0, layoutDistance));
     const titleBlack = smooth(range(listScroll, 0.83, 1));
-    const titleExit = smooth(range(tail, window.innerHeight * 0.3, window.innerHeight * 1.4));
-    const fade = smooth(range(tail, window.innerHeight * 1.05, window.innerHeight * 1.85));
+    const titleExit = smooth(range(tail, storyViewportHeight * 0.3, storyViewportHeight * 1.4));
+    const fade = smooth(range(tail, storyViewportHeight * 1.05, storyViewportHeight * 1.85));
     updatePreviewTilt(
       scrollY,
       previewIntroState === 'ready' && layout > 0.08 && fade < 0.98 && !aboutReturning && !navigationTarget
@@ -685,6 +740,7 @@
     if (!measure) return;
     const local = scrollY - measure.start;
     const worksStart = metrics.get(works)?.start ?? measure.end;
+    if (scrollY < measure.start - storyViewportHeight || scrollY > worksStart + storyViewportHeight) return;
     const aboutHold = Math.max(0, Math.min(scrollY - aboutEndStart, worksStart - aboutEndStart));
     aboutBody.style.transform = `translate3d(0, ${aboutHold}px, 0)`;
     const keepMetaDuringExit = worksIntroState === 'playing';
@@ -693,10 +749,10 @@
       returnToPreview();
       return;
     }
-    if (local < -window.innerHeight * 0.3 && aboutIntroState !== 'idle') resetAboutIntro();
-    if (local >= -1 && local < window.innerHeight && aboutIntroState === 'idle' && !aboutNavPending && !navigationTarget) startAboutIntro();
+    if (local < -storyViewportHeight * 0.3 && aboutIntroState !== 'idle') resetAboutIntro();
+    if (local >= -1 && local < storyViewportHeight && aboutIntroState === 'idle' && !aboutNavPending && !navigationTarget) startAboutIntro();
     const afterIntro = aboutIntroState === 'ready' ? Math.max(0, scrollY - aboutLayoutAnchor) : 0;
-    const titleExit = smooth(range(afterIntro, window.innerHeight * 0.08, window.innerHeight * 0.72));
+    const titleExit = smooth(range(afterIntro, storyViewportHeight * 0.08, storyViewportHeight * 0.72));
     const titleWeight = Math.round(lerp(700, 100, titleExit));
     aboutTitle.style.fontVariationSettings = `"wght" ${titleWeight}`;
     aboutTitle.style.removeProperty('visibility');
@@ -708,23 +764,21 @@
     if (worksReturning) return;
     const measure = metrics.get(works);
     if (!measure) return;
+    if (scrollY < measure.start - storyViewportHeight) return;
     const local = scrollY - measure.start;
     if (local < -1 && worksIntroState === 'ready' && !navigationTarget) {
       returnToAbout();
       return;
     }
-    if (local < -window.innerHeight * 0.3 && worksIntroState !== 'idle') resetWorksIntro();
-    if (local >= -1 && local < window.innerHeight && worksIntroState === 'idle' && !worksNavPending && !navigationTarget) startWorksIntro();
+    if (local < -storyViewportHeight * 0.3 && worksIntroState !== 'idle') resetWorksIntro();
+    if (local >= -1 && local < storyViewportHeight && worksIntroState === 'idle' && !worksNavPending && !navigationTarget) startWorksIntro();
     const afterIntro = worksIntroState === 'ready' ? Math.max(0, scrollY - worksLayoutAnchor) : 0;
     const titleExit = smooth(range(afterIntro, 0, 444));
     const titleWeight = Math.round(lerp(760, 100, titleExit));
     worksTitle.style.fontVariationSettings = `"wght" ${titleWeight}`;
     worksTitle.style.removeProperty('visibility');
     if (footerWord) {
-      const footerTop = footer.getBoundingClientRect().top + scrollY;
-      const pageEnd = document.documentElement.scrollHeight - window.innerHeight;
-      const footerStart = Math.min(pageEnd - 1, footerTop - window.innerHeight * 0.9);
-      const footerProgress = smooth(range(scrollY, footerStart, pageEnd));
+      const footerProgress = smooth(range(scrollY, footerScrollStart, pageScrollEnd));
       footerWord.style.fontVariationSettings = `"wght" ${Math.round(lerp(100, 760, footerProgress))}`;
     }
   };
@@ -740,7 +794,7 @@
   };
 
   const updateNavigation = (scrollY) => {
-    const marker = scrollY + window.innerHeight * 0.28;
+    const marker = scrollY + storyViewportHeight * 0.28;
     let active = sections[0]?.dataset.storySection;
     sections.forEach((section) => {
       const measure = metrics.get(section);
@@ -863,7 +917,15 @@
   });
 
   window.addEventListener('scroll', requestStoryUpdate, { passive: true });
-  window.addEventListener('resize', () => requestAnimationFrame(refreshMetrics), { passive: true });
+  const scheduleMetricsRefresh = () => {
+    const widthChanged = Math.abs(window.innerWidth - lastViewportWidth) > 1;
+    lastViewportWidth = window.innerWidth;
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => requestAnimationFrame(refreshMetrics), widthChanged ? 50 : 180);
+  };
+  window.addEventListener('resize', scheduleMetricsRefresh, { passive: true });
+  window.visualViewport?.addEventListener('resize', scheduleMetricsRefresh, { passive: true });
+  window.addEventListener('orientationchange', scheduleMetricsRefresh, { passive: true });
   window.addEventListener('load', refreshMetrics, { once: true });
 
   const showInitialScene = async () => {

@@ -5,10 +5,14 @@
   --story-gutter: 80px;
   --story-max-width: 2560px;
   --story-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --story-viewport-height: 100dvh;
 }
 
 html.has-story-site {
   overflow-x: clip;
+  min-height: 100%;
+  overscroll-behavior-y: none;
+  background: #fff;
 }
 
 body > .topbar,
@@ -24,12 +28,15 @@ body {
 
 body.has-story-site {
   overflow-x: visible;
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
 }
 
 .story-site {
   position: relative;
   z-index: 1;
   width: 100%;
+  min-height: 100dvh;
   color: var(--story-ink);
   background: #fff;
 }
@@ -127,12 +134,14 @@ body.has-story-site {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100svh;
+  height: var(--story-viewport-height);
+  min-height: 100svh;
   overflow: hidden;
 }
 
 .story-home {
-  height: 100svh;
+  height: var(--story-viewport-height);
+  min-height: 100svh;
   background: #fff;
 }
 
@@ -416,6 +425,8 @@ body.has-story-site {
 }
 
 .preview-stack {
+  --preview-list-y: 0px;
+  --preview-list-tilt: 0deg;
   position: absolute;
   top: 20vh;
   left: 50%;
@@ -448,6 +459,7 @@ body.has-story-site {
   opacity: 1;
   animation: storyPreviewStackIn 1100ms cubic-bezier(0.22, 0.72, 0.24, 1) forwards;
   animation-delay: calc(1060ms + var(--stack-order) * 220ms);
+  will-change: transform, clip-path;
 }
 
 @keyframes storyPreviewStackIn {
@@ -501,13 +513,14 @@ body.has-story-site {
 
 .story-about {
   z-index: 3;
-  margin-top: -100svh;
+  margin-top: calc(-1 * var(--story-viewport-height));
   padding: 0;
   background: transparent;
 }
 
 .story-about-intro {
-  height: 100svh;
+  height: var(--story-viewport-height);
+  min-height: 100svh;
   pointer-events: none;
 }
 
@@ -604,7 +617,7 @@ body.has-story-site {
 
 .about-heading {
   position: absolute;
-  bottom: 24px;
+  bottom: max(24px, env(safe-area-inset-bottom));
   right: auto;
   left: 50%;
   width: min(calc(100% - var(--story-gutter) * 2), calc(var(--story-max-width) - var(--story-gutter) * 2));
@@ -615,7 +628,7 @@ body.has-story-site {
 .about-persistent-meta {
   position: fixed;
   right: auto;
-  bottom: 24px;
+  bottom: max(24px, env(safe-area-inset-bottom));
   left: 50%;
   z-index: 20;
   width: min(calc(100% - var(--story-gutter) * 2), calc(var(--story-max-width) - var(--story-gutter) * 2));
@@ -660,7 +673,7 @@ body.has-story-site {
   background: #fff;
   opacity: 1;
   transition: opacity 620ms var(--story-ease);
-  margin-top: max(80px, calc(var(--about-hero-end, 590px) + 400px - 100svh));
+  margin-top: max(80px, calc(var(--about-hero-end, 590px) + 400px - var(--story-viewport-height)));
   gap: 200px;
   width: 100%;
   max-width: var(--story-max-width);
@@ -801,8 +814,8 @@ body.has-story-site {
 
 .story-about-end {
   position: relative;
-  height: 180svh;
-  margin-top: calc(332px - 50svh);
+  height: 180dvh;
+  margin-top: calc(332px - 50dvh);
   background: #fff;
 }
 
@@ -836,7 +849,7 @@ body.has-story-site {
 .story-works {
   position: relative;
   z-index: 4;
-  margin-top: -100svh;
+  margin-top: calc(-1 * var(--story-viewport-height));
   padding-top: 0;
   background: transparent;
   opacity: 1;
@@ -1038,7 +1051,14 @@ body.has-story-site {
   width: min(100%, var(--story-max-width));
   margin: 240px auto 0;
   overflow: hidden;
-  padding: 0 var(--story-gutter);
+  padding: 0 var(--story-gutter) max(24px, env(safe-area-inset-bottom));
+}
+
+@supports not (height: 100dvh) {
+  :root { --story-viewport-height: 100vh; }
+  body.has-story-site,
+  .story-site { min-height: 100vh; }
+  .story-about-end { height: 180vh; margin-top: calc(332px - 50vh); }
 }
 
 .story-footer-word {
@@ -1065,13 +1085,45 @@ body.has-story-site {
 }
 
 @media (max-width: 900px) {
-  :root { --story-gutter: 24px; }
+  :root {
+    --story-gutter: clamp(16px, 6.15vw, 24px);
+    --story-mobile-content-gutter: clamp(24px, 8vw, 48px);
+  }
 
   .story-topbar {
     grid-template-columns: auto minmax(0, 1fr);
     min-height: 72px;
-    padding: 24px 16px 0;
+    padding: max(24px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
     gap: 10px;
+  }
+
+  .story-site { touch-action: pan-y; }
+
+  .preview-stack {
+    transform: translate3d(-50%, var(--preview-list-y), 0);
+    backface-visibility: hidden;
+  }
+
+  .preview-card {
+    rotate: none;
+    transition: none;
+    backface-visibility: hidden;
+    contain: layout paint style;
+  }
+
+  .is-entered .story-title-letter {
+    animation-duration: 600ms;
+    animation-delay: calc(var(--letter-index) * 28ms);
+  }
+
+  .story-preview.is-returning-from-about .preview-heading .story-title-letter {
+    animation-duration: 600ms;
+    animation-delay: calc(var(--letter-index) * 28ms);
+  }
+
+  .story-preview.is-preview-intro .preview-card:nth-child(-n+5) {
+    animation-duration: 800ms;
+    animation-delay: calc(620ms + var(--stack-order) * 145ms);
   }
 
   .story-bio,
@@ -1079,6 +1131,18 @@ body.has-story-site {
   .story-nav { justify-content: flex-end; }
   .story-brand,
   .story-nav button { font-size: 11px; }
+
+  .story-nav button {
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .story-nav button:active,
+  .story-nav button:focus {
+    background: transparent;
+    box-shadow: none;
+  }
 
   .story-home-card {
     width: min(76vw, 369px);
@@ -1134,34 +1198,64 @@ body.has-story-site {
   .story-meta-group { gap: 16px; }
 
   .story-about-hero { padding-top: 120px; }
-  .story-about-mask { height: min(28svh, 220px); }
+  .story-about-mask { height: min(28dvh, 220px); }
+  .story-about-mask { transition-duration: 850ms; }
+  .story-about-mask img { transition-duration: 950ms; }
   .story-about-mask img { object-position: 70% center; }
-  .story-about-identity { font-size: 24px; line-height: 30px; }
+  .story-about-identity {
+    font-size: 24px;
+    line-height: 30px;
+    transition-duration: 600ms;
+    transition-delay: 280ms;
+  }
   .about-big-title { height: 1.3em; }
+  .story-about.is-entered .about-big-title .story-title-letter {
+    animation-delay: calc(300ms + var(--letter-index) * 28ms);
+  }
   .story-about-body { margin-top: 0; gap: 200px; }
   .story-about-profile,
   .story-experience,
   .story-skills,
   .story-contact-block {
-    width: calc(100% - 96px);
-    margin-right: 48px;
-    margin-left: 48px;
+    width: calc(100% - var(--story-mobile-content-gutter) * 2);
+    margin-right: var(--story-mobile-content-gutter);
+    margin-left: var(--story-mobile-content-gutter);
   }
 
   .story-about-profile { gap: 32px; }
-  .story-about-portrait { width: 60vw; max-width: 280px; height: auto; aspect-ratio: 14 / 15; }
+  .story-about-portrait { width: min(72vw, 280px); max-width: 100%; height: auto; aspect-ratio: 14 / 15; }
   .story-about-copy { font-size: 16px; line-height: 22px; }
-  .story-subheading { margin-bottom: 40px; font-size: 24px; line-height: 30px; }
-  .story-experience-list { gap: 32px; }
-  .story-experience-row { gap: 16px; font-size: 16px; line-height: 24px; }
-  .story-experience-row p { margin-top: 6px; }
-  .story-experience-logo { min-width: 72px; font-size: 12px; }
+  .story-subheading { margin-bottom: 40px; font-size: 36px; line-height: 43px; }
+  .story-experience-list { gap: 40px; }
+  .story-experience-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 0;
+    gap: 16px;
+    align-items: start;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .story-experience-row p {
+    max-width: 100%;
+    margin-top: 8px;
+    overflow-wrap: break-word;
+  }
+  .story-experience-logo { min-width: 64px; font-size: 12px; }
   .story-experience-logo img { max-width: 72px; max-height: 22px; }
-  .story-skills { gap: 24px; }
-  .story-skills .story-subheading { font-size: 24px; line-height: 30px; }
-  .story-skills-list { width: 190px; font-size: 24px; line-height: 30px; }
+  .story-museum-logo { width: 112px; gap: 6px; }
+  .story-museum-logo img:first-child { width: 40px; height: auto; }
+  .story-museum-logo img:last-child { width: 66px; height: auto; margin-top: 4px; }
+  .story-skills {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .story-skills .story-subheading { font-size: 32px; line-height: 38px; }
+  .story-skills-list { width: auto; min-width: 0; font-size: 24px; line-height: 32px; }
 
-  .story-about-end { height: 170svh; margin-top: calc(290px - 50svh); }
+  .story-about-end { height: 170dvh; margin-top: calc(290px - 50dvh); }
   .about-end-tip { bottom: 18%; }
 
   .story-works { padding-top: 0; }
@@ -1170,15 +1264,25 @@ body.has-story-site {
     padding: 72px 16px 0;
   }
   .story-works-heading .story-chapter-title {
-    height: calc(min(45.5svh, 312px) - 126px);
-    line-height: 0.96;
+    height: 0.92em;
+    line-height: 0.92;
   }
-  .story-works-heading .story-chapter-meta { margin-top: 16px; }
+  .story-works-heading .story-chapter-meta { margin-top: 20px; }
   .story-work-grid {
     grid-template-columns: 1fr;
     margin-top: 56px;
     padding: 0;
     gap: 56px;
+  }
+
+  .story-work-card {
+    filter: blur(9px);
+    transform: translate3d(0, 56px, 0);
+    transition-duration: 600ms, 700ms, 650ms;
+  }
+
+  .story-works.is-cards-entered .story-work-card {
+    transition-delay: calc(var(--card-index) * 60ms);
   }
 
   .story-work-index,
@@ -1194,6 +1298,39 @@ body.has-story-site {
   .story-footer { margin-top: 240px; }
   .story-footer-meta { flex-direction: column; gap: 10px; align-items: flex-start; }
   .story-footer-word { margin-top: 28px; }
+}
+
+@media (max-width: 480px) {
+  .story-chapter-meta,
+  .story-footer-meta { font-size: 9px; line-height: 14px; }
+  .story-meta-group { gap: 10px; }
+  .story-experience-logo { min-width: 56px; }
+  .story-museum-logo { width: 96px; gap: 5px; }
+  .story-museum-logo img:first-child { width: 34px; }
+  .story-museum-logo img:last-child { width: 57px; }
+  .story-skills { gap: 16px; }
+  .story-skills .story-subheading { font-size: 28px; line-height: 34px; }
+  .story-skills-list { font-size: 22px; line-height: 29px; }
+}
+
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 900px) {
+    html.has-story-site,
+    body.has-story-site {
+      background-color: transparent;
+    }
+
+    .story-topbar {
+      background-color: transparent;
+    }
+  }
+}
+
+@supports not (height: 100dvh) {
+  @media (max-width: 900px) {
+    .story-about-mask { height: min(28vh, 220px); }
+    .story-about-end { height: 170vh; margin-top: calc(290px - 50vh); }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
