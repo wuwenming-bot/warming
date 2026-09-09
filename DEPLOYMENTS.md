@@ -6,6 +6,7 @@ Alias: https://www.wenmingwu.com
 
 | Version | Date (Asia/Shanghai) | Commit | Summary |
 | --- | --- | --- | --- |
+| v1.3.0 | 2026-09-10 | `85f999d` | Mobile long-page browsing with native section flow, simplified Preview work list, stable Safari viewport behavior, refined responsive spacing and imagery, and smooth scroll-driven title weight changes across Preview, About, Works, and the footer. |
 | v1.2.1 | 2026-09-08 | `57e9389` | Mobile layout and scroll-state refinements, optimized responsive media, isolated desktop Preview tilt behavior, improved module spacing, and cleaner touch navigation feedback. |
 | v1.2.0 | 2026-09-08 | `6a54b88` | Scroll-driven portfolio redesign with responsive Preview, About, and Works transitions; refreshed high-resolution imagery; restored two-card interactive home; and updated contact actions. |
 | v1.1.2 | 2026-08-31 | `638372e` | Faster persistent project-detail images, mobile Works gestures and sizing, immediate hero-card interaction, and refined mobile logo marquee. |
