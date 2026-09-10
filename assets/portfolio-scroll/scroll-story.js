@@ -43,6 +43,72 @@
   const coarsePointerQuery = window.matchMedia('(hover: none), (pointer: coarse)');
   const isMobileInteraction = () => mobileLayoutQuery.matches || coarsePointerQuery.matches;
 
+  const imagePlaceholderColors = Object.freeze({
+    'assets/portfolio-frame7/hero-card-frame7-1400.webp': '#f3f3f3',
+    'assets/portfolio-scroll/about-hero-source.png': '#f2f3f3',
+    'assets/portfolio-scroll/about-hero.png': '#141313',
+    'assets/portfolio-scroll/about-portrait-source.png': '#fdfdfd',
+    'assets/portfolio-scroll/preview-01-mobile.webp': '#fafafa',
+    'assets/portfolio-scroll/preview-01.png': '#fafaf9',
+    'assets/portfolio-scroll/preview-02-mobile.webp': '#e4e4e4',
+    'assets/portfolio-scroll/preview-02.png': '#e4e4e4',
+    'assets/portfolio-scroll/preview-03-mobile.webp': '#151e0a',
+    'assets/portfolio-scroll/preview-03.png': '#151e0a',
+    'assets/portfolio-scroll/preview-04-mobile.webp': '#b3f2f4',
+    'assets/portfolio-scroll/preview-04.png': '#b2f1f4',
+    'assets/portfolio-scroll/preview-05-mobile.webp': '#0e0f0f',
+    'assets/portfolio-scroll/preview-05.png': '#0e0f0f',
+    'assets/portfolio-scroll/preview-06-mobile.webp': '#000000',
+    'assets/portfolio-scroll/preview-06.png': '#000000',
+    'assets/portfolio-scroll/preview-07-mobile.webp': '#fafafa',
+    'assets/portfolio-scroll/preview-07.png': '#fafaf9',
+    'assets/portfolio-scroll/preview-08-mobile.webp': '#ffffff',
+    'assets/portfolio-scroll/preview-08.png': '#ffffff',
+    'assets/portfolio-scroll/preview-09-mobile.webp': '#fafafa',
+    'assets/portfolio-scroll/preview-09.png': '#fafaf9',
+    'assets/portfolio-scroll/preview-10-mobile.webp': '#cccccc',
+    'assets/portfolio-scroll/preview-10.png': '#cbcbcb',
+    'assets/portfolio-scroll/preview-11-mobile.webp': '#ffffff',
+    'assets/portfolio-scroll/preview-11.png': '#ffffff',
+    'assets/portfolio-scroll/preview-12-mobile.webp': '#000000',
+    'assets/portfolio-scroll/preview-12.png': '#000000',
+    'assets/portfolio-scroll/preview-13-mobile.webp': '#0a1119',
+    'assets/portfolio-scroll/preview-13.png': '#0a1018',
+    'assets/portfolio-scroll/preview-14-mobile.webp': '#e6e9ef',
+    'assets/portfolio-scroll/preview-14.png': '#d0d6de',
+    'assets/portfolio-scroll/preview-15-mobile.webp': '#030303',
+    'assets/portfolio-scroll/preview-15.png': '#040506',
+    'assets/portfolio-v6/about-bytedance.png': '#ffffff',
+    'assets/portfolio-v6/work-base.png': '#010101',
+    'assets/portfolio-v6/work-blurrr.png': '#f2f8e9',
+    'assets/portfolio-v6/work-capcut-lite.png': '#000000',
+    'assets/portfolio-v6/work-capcut.png': '#000000',
+    'assets/portfolio-v6/work-dreamina.png': '#000000',
+    'assets/portfolio-v7/hero-card-image-1600.webp': '#ececec',
+    'assets/portfolio-v7/paperclip-hd-384.webp': '#ffffff'
+  });
+
+  const normalizeImageSource = (source = '') => source.split('?')[0];
+  const resolveImageSource = (image) => (
+    (isMobileInteraction() && image.dataset.srcMobile) || image.dataset.src || image.getAttribute('src') || ''
+  );
+  const markStoryImageLoaded = (image) => {
+    const reveal = () => image.classList.add('is-story-image-loaded');
+    if (typeof image.decode === 'function') image.decode().then(reveal, reveal);
+    else reveal();
+  };
+  const prepareStoryImage = (image, source = resolveImageSource(image)) => {
+    const key = normalizeImageSource(source);
+    image.style.setProperty('--story-image-placeholder', imagePlaceholderColors[key] || '#ffffff');
+    if (image.dataset.storyImagePrepared !== 'true') {
+      image.dataset.storyImagePrepared = 'true';
+      image.addEventListener('load', () => markStoryImageLoaded(image));
+    }
+    if (image.complete && image.naturalWidth > 0) markStoryImageLoaded(image);
+  };
+
+  site.querySelectorAll('img').forEach((image) => prepareStoryImage(image));
+
   const previewContentWidth = 800;
   const previewContentHeight = 10250;
   const previewStackWidths = [480, 468, 468, 468, 468];
@@ -73,16 +139,37 @@
     }
   });
 
-  const loadModule = (module) => {
-    if (!module || module.dataset.moduleLoaded === 'true') return;
+  const loadModule = (module, { eager = false, lowPriority = false } = {}) => {
+    if (!module) return;
+    if (module.dataset.moduleLoaded === 'true') {
+      if (eager) {
+        module.querySelectorAll('img').forEach((image) => {
+          image.loading = 'eager';
+          if (lowPriority) image.fetchPriority = 'low';
+        });
+      }
+      return;
+    }
     module.dataset.moduleLoaded = 'true';
     module.querySelectorAll('img[data-src]').forEach((image, index) => {
-      image.loading = (module === preview && index < 5) || (module === about && index === 0) || module === works ? 'eager' : 'lazy';
-      image.src = (isMobileInteraction() && image.dataset.srcMobile) || image.dataset.src;
+      const source = resolveImageSource(image);
+      prepareStoryImage(image, source);
+      image.loading = eager || (module === preview && index < 5) || (module === about && index === 0) || module === works ? 'eager' : 'lazy';
+      if (lowPriority) image.fetchPriority = 'low';
+      image.src = source;
       image.removeAttribute('data-src');
       image.removeAttribute('data-src-mobile');
     });
   };
+
+  const preloadPreviewImages = () => loadModule(preview, { eager: true, lowPriority: true });
+  if (isMobileInteraction()) {
+    preloadPreviewImages();
+  } else if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(preloadPreviewImages, { timeout: 900 });
+  } else {
+    window.setTimeout(preloadPreviewImages, 250);
+  }
 
   const enterModule = (module) => {
     if (!module) return;
@@ -165,6 +252,72 @@
 
     if (previousVariation) title.style.fontVariationSettings = previousVariation;
     else title.style.removeProperty('font-variation-settings');
+  };
+
+  const fitAboutIntroLayout = (mobile) => {
+    const aboutHeading = aboutTitle.closest('.about-heading');
+    const aboutIdentity = about.querySelector('.story-about-identity');
+    if (!aboutHeading || !aboutIdentity || !aboutIntroTip) return;
+
+    aboutHeading.style.removeProperty('top');
+    aboutHeading.style.removeProperty('bottom');
+    aboutHeading.style.paddingBottom = `${aboutMeta.offsetHeight}px`;
+    aboutTitle.style.removeProperty('font-size');
+    const baseTitleSize = Number.parseFloat(getComputedStyle(aboutTitle).fontSize);
+    const renderedTitleWidth = [...aboutTitle.querySelectorAll('.story-title-letter')].reduce(
+      (width, letter) => width + letter.getBoundingClientRect().width,
+      0
+    );
+    if (renderedTitleWidth > aboutTitle.clientWidth) {
+      aboutTitle.style.fontSize = `${baseTitleSize * aboutTitle.clientWidth / renderedTitleWidth}px`;
+    }
+
+    const titleGap = 48;
+    const identityGap = 48;
+    const readTipTop = () => {
+      const titleRect = aboutTitle.getBoundingClientRect();
+      const headingRect = aboutHeading.getBoundingClientRect();
+      const titleLineHeight = Number.parseFloat(getComputedStyle(aboutTitle).lineHeight);
+      const titleLineTop = titleRect.top + Math.max(0, (titleRect.height - titleLineHeight) / 2);
+      return {
+        relative: titleLineTop - headingRect.top - aboutIntroTip.offsetHeight - titleGap
+      };
+    };
+
+    if (!mobile) {
+      const fittedSize = Number.parseFloat(getComputedStyle(aboutTitle).fontSize);
+      const minimumSize = Math.min(72, fittedSize);
+      const identityStyle = getComputedStyle(aboutIdentity);
+      const identityTransform = identityStyle.transform === 'none'
+        ? 0
+        : new DOMMatrixReadOnly(identityStyle.transform).m42;
+      const requiredTipTop = aboutIdentity.getBoundingClientRect().bottom - identityTransform + identityGap;
+      const aboutScene = about.querySelector('.story-about-scene');
+      const availableBottom = aboutScene.getBoundingClientRect().bottom - 24;
+      const fitsAtSize = (size) => {
+        aboutTitle.style.fontSize = `${size}px`;
+        const tipTop = readTipTop().relative;
+        const desiredHeadingTop = requiredTipTop - tipTop;
+        return desiredHeadingTop + aboutHeading.offsetHeight <= availableBottom;
+      };
+      let low = minimumSize;
+      let high = fittedSize;
+
+      if (!fitsAtSize(fittedSize)) {
+        for (let index = 0; index < 12; index += 1) {
+          const candidate = (low + high) / 2;
+          if (fitsAtSize(candidate)) low = candidate;
+          else high = candidate;
+        }
+        aboutTitle.style.fontSize = `${low}px`;
+      }
+
+      const headingTop = requiredTipTop - readTipTop().relative;
+      aboutHeading.style.top = `${headingTop - aboutScene.getBoundingClientRect().top}px`;
+      aboutHeading.style.bottom = 'auto';
+    }
+
+    aboutIntroTip.style.top = `${readTipTop().relative}px`;
   };
   let aboutEndStart = 0;
   let aboutReturnTimer = 0;
@@ -407,24 +560,7 @@
     }
     fitSplitTitleToWidth(previewHeading.querySelector('.story-chapter-title'), 700);
 
-    aboutTitle.style.fontSize = '';
-    const aboutTitleSize = Number.parseFloat(getComputedStyle(aboutTitle).fontSize);
-    const aboutTitleWidth = [...aboutTitle.children].reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
-    if (aboutTitleWidth > aboutTitle.clientWidth) {
-      aboutTitle.style.fontSize = `${aboutTitleSize * aboutTitle.clientWidth / aboutTitleWidth}px`;
-    }
-
-    const aboutHeading = aboutTitle.closest('.about-heading');
-    if (aboutIntroTip && aboutHeading) {
-      const titleRect = aboutTitle.getBoundingClientRect();
-      const headingRect = aboutHeading.getBoundingClientRect();
-      const titleLineHeight = Number.parseFloat(getComputedStyle(aboutTitle).lineHeight);
-      const titleLineTop = titleRect.top + Math.max(0, (titleRect.height - titleLineHeight) / 2);
-      const tipTop = titleLineTop - headingRect.top - aboutIntroTip.offsetHeight - 48;
-      aboutIntroTip.style.top = `${tipTop}px`;
-    }
-
-    about.querySelector('.about-heading').style.paddingBottom = `${aboutMeta.offsetHeight}px`;
+    fitAboutIntroLayout(mobile);
     about.style.setProperty('--about-hero-end', `${about.querySelector('.story-about-hero').offsetHeight}px`);
     aboutEndStart = aboutEnd.getBoundingClientRect().top + window.scrollY;
     fitSplitTitleToWidth(footerWord, 760);
