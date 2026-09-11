@@ -6,6 +6,7 @@ Alias: https://www.wenmingwu.com
 
 | Version | Date (Asia/Shanghai) | Commit | Summary |
 | --- | --- | --- | --- |
+| v1.3.2 | 2026-09-11 | `f8ee535` | Prevented Works covers from reappearing during the reverse transition to About and aligned the desktop footer wordmark's bold glyph edges with its metadata gutters. |
 | v1.3.1 | 2026-09-10 | `ba8797b` | Desktop About spacing and responsive title refinements, corrected experience and footer typography, plus eager Preview image loading with dominant-color placeholders. |
 | v1.3.0 | 2026-09-10 | `85f999d` | Mobile long-page browsing with native section flow, simplified Preview work list, stable Safari viewport behavior, refined responsive spacing and imagery, and smooth scroll-driven title weight changes across Preview, About, Works, and the footer. |
 | v1.2.1 | 2026-09-08 | `57e9389` | Mobile layout and scroll-state refinements, optimized responsive media, isolated desktop Preview tilt behavior, improved module spacing, and cleaner touch navigation feedback. |
