@@ -874,7 +874,8 @@ body.has-story-site {
   transition: opacity 620ms var(--story-ease);
 }
 
-.story-works.is-returning { opacity: 0; }
+.story-works.is-returning,
+.story-works.is-suspended { opacity: 0; }
 
 .story-works-heading {
   position: relative;

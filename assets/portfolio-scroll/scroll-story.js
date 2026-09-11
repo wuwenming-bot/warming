@@ -235,11 +235,14 @@
   let frame = 0;
   let aboutScrollLock = null;
 
-  const fitSplitTitleToWidth = (title, referenceWeight) => {
+  const fitSplitTitleToWidth = (title, referenceWeight, lockReferenceWeight = false) => {
     if (!title) return;
     const previousVariation = title.style.fontVariationSettings;
+    const previousTransition = title.style.transition;
+    if (lockReferenceWeight) title.style.transition = 'none';
     title.style.removeProperty('font-size');
     title.style.fontVariationSettings = `"wght" ${referenceWeight}`;
+    if (lockReferenceWeight) void title.offsetWidth;
 
     const baseSize = Number.parseFloat(getComputedStyle(title).fontSize);
     const renderedWidth = [...title.querySelectorAll('.story-title-letter')].reduce(
@@ -252,6 +255,11 @@
 
     if (previousVariation) title.style.fontVariationSettings = previousVariation;
     else title.style.removeProperty('font-variation-settings');
+    if (lockReferenceWeight) {
+      void title.offsetWidth;
+      if (previousTransition) title.style.transition = previousTransition;
+      else title.style.removeProperty('transition');
+    }
   };
 
   const fitAboutIntroLayout = (mobile) => {
@@ -563,7 +571,7 @@
     fitAboutIntroLayout(mobile);
     about.style.setProperty('--about-hero-end', `${about.querySelector('.story-about-hero').offsetHeight}px`);
     aboutEndStart = aboutEnd.getBoundingClientRect().top + window.scrollY;
-    fitSplitTitleToWidth(footerWord, 760);
+    fitSplitTitleToWidth(footerWord, 760, !mobile);
     metrics = new Map(sections.map((section) => [section, readSectionMetrics(section)]));
     if (mobile) {
       mobileTitleScrollDistances = new Map([
@@ -813,7 +821,7 @@
   const resetWorksIntro = () => {
     window.clearTimeout(worksReturnTimer);
     worksReturning = false;
-    works.classList.remove('is-returning');
+    works.classList.remove('is-returning', 'is-suspended');
     releaseWorksScroll();
     worksIntroSequence += 1;
     window.clearTimeout(worksIntroTimer);
@@ -859,7 +867,7 @@
         releaseWorksScroll();
         worksIntroState = 'idle';
         worksReturning = false;
-        works.classList.remove('is-returning');
+        works.classList.replace('is-returning', 'is-suspended');
         requestStoryUpdate();
       }, reducedMotion ? 0 : 80);
     }, reducedMotion ? 0 : (isMobileInteraction() ? 420 : 620));
